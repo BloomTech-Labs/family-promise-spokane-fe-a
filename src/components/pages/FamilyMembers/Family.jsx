@@ -11,6 +11,7 @@ const FamilyMembers = () => {
   const history = useHistory();
   const params = useParams();
   const [loading, setLoading] = useState(true);
+  // familyInfo has not been set. There is a useEffect to console.log(familyInfo) but it's commented out. We need to figure out what's happening and where it should be used.
   const [familyInfo, setFamilyInfo] = useState({});
   const [state, setState] = useState({
     columns: [
@@ -49,6 +50,7 @@ const FamilyMembers = () => {
 
   useEffect(() => {
     fetchFamilyInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // useEffect(() => {
