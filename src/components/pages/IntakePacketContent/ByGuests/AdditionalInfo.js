@@ -15,8 +15,6 @@ import IntakeButton from '../IntakeButtons';
 //Ant Design imports (https://ant.design/components/overview/)
 import { Form, Card, Input, Checkbox, Row, Col, Progress, Divider } from 'antd';
 
-import { axiosWithAuth } from '../../../../api/axiosWithAuth';
-
 const AdditionalInfo = ({
   navigation,
   tempFormStyle,
@@ -31,9 +29,7 @@ const AdditionalInfo = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   //FamilyMember Data Structure and FamilyInfo from ../../intakePacket.jsx (props)
-  const { familyInfo, familyMember } = formData;
-
-  const history = useHistory();
+  const { familyInfo } = formData;
 
   //Options for Gov Benifits w/dataBase name counterpart
   const GOVBenifits = [
