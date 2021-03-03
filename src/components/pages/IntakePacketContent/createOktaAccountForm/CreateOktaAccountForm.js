@@ -4,9 +4,9 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
-const okta_register_url = `${process.env.REACT_APP_OKTA_ISSUER_URI}/api/v1/registration/reg6oarezBULckqh65d6/register`;
+const okta_register_url = `${process.env.REACT_APP_OKTA_ISSUER_BASE_URI}/api/v1/registration/reg6oarezBULckqh65d6/register`;
 
-const okta_activate_url = `${process.env.REACT_APP_OKTA_ISSUER_URI}/api/v1/authn`;
+const okta_activate_url = `${process.env.REACT_APP_OKTA_ISSUER_BASE_URI}/api/v1/authn`;
 
 const CreateOktaAccountForm = ({ setUserId }) => {
   const [loading, setLoading] = React.useState(false);
