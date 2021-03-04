@@ -38,6 +38,7 @@ const Guests = ({ guestsCheckedInCount, setGuestsCheckedInCount }) => {
     ],
     data: [],
   });
+
   function toggleModal(e) {
     e.preventDefault();
     setIsOpen(!isOpen);
@@ -46,11 +47,8 @@ const Guests = ({ guestsCheckedInCount, setGuestsCheckedInCount }) => {
   useEffect(() => {
     let copy = { ...state };
     let filter = globalLogs.filter(
-      member =>
-        member.reservation_status === true &&
-        member.check_in[0].reservation_status === true
+      member => member.check_in[0].reservation_status === true
     );
-    // this reformats the filtered logs to spread out the nested values
     let formattedData = filter.map(member => {
       return {
         ...member.demographics,
@@ -62,13 +60,10 @@ const Guests = ({ guestsCheckedInCount, setGuestsCheckedInCount }) => {
       };
     });
 
-    // if there is no data, we populate our table
-    if (copy.data.length === 0) {
-      copy.data.push(...formattedData);
-      console.log(copy);
-      setState(copy);
-    }
+    copy.data.push(...formattedData);
+    console.log(copy);
 
+    setState(copy);
     setLoading(false);
   }, [globalLogs]);
 
