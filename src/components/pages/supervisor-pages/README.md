@@ -17,5 +17,7 @@ General Notes:
 1. Too many api calls. Fix the backend so that you are getting the info in one call. 
 2. On deployed site some filtering functions for the logs are not working from the back end.
 3. The log table is the reservation list. Logs are made each time a guest makes a reservation. If they cancel the log will still exist, it will just have a reservation status of false which is why we are filtering the globalLogs by their reservation status on the front end. 
-4. Uncomment line 349 in SupervisorAnalytics to display all of the daily logs for development purposes.  
+4. Uncomment line 349 in SupervisorAnalytics to display all of the daily logs for development purposes. 
+
+You can do it!  
 
