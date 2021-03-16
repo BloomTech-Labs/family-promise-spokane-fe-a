@@ -29,3 +29,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# adding this to prevent future merge conflicts
+package-lock.json
