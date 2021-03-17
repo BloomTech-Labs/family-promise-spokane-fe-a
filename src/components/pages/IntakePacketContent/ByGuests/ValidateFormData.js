@@ -69,26 +69,47 @@ const ValidateFormData = ({
       });
   }
 
+  const redirectToDocusign = async () => {
+    try {
+      const res = await axios.post(
+        'http://localhost:8000/callDS',
+        envelopeArgs
+      );
+      setLoadDocusign(!loadDocuSign);
+      dispatch(getDocuSignUrl(res.data));
+    } catch (error) {
+      console.log('Error in load docusign', error);
+    }
+  };
+
   return (
     <div style={tempFormStyle}>
       <h2>Placeholder for Data Validation</h2>
       <Progress percent={percent} status="active" showInfo={false} />
-      <Button
-        type="primary"
-        htmlType="button"
-        onClick={previous}
-        style={{ width: '100px' }}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginBottom: '30px',
+        }}
       >
-        Previous
-      </Button>
-      <Button
-        type="primary"
-        htmlType="button"
-        onClick={callDocusign}
-        style={{ width: '100px' }}
-      >
-        Next
-      </Button>
+        <Button
+          type="primary"
+          htmlType="button"
+          onClick={previous}
+          style={{ width: '100px' }}
+        >
+          Previous
+        </Button>
+        <Button
+          type="primary"
+          htmlType="button"
+          onClick={callDocusign}
+          style={{ width: '100px' }}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 };
