@@ -22,6 +22,7 @@ import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
 import Pets from './IntakePacketContent/ByGuests/Pets';
+import ValidateFormData from './IntakePacketContent/ByGuests/ValidateFormData';
 
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
@@ -119,6 +120,7 @@ const steps = [
   { id: 'Insurance' },
   { id: 'AdditionalInfo' },
   { id: 'Pets' },
+  { id: 'ValidateFormData' },
 ];
 
 const IntakePacket = () => {
@@ -185,6 +187,8 @@ const IntakePacket = () => {
       return <AdditionalInfo {...props} />;
     case 'Pets':
       return <Pets {...props} />;
+    case 'ValidateFormData':
+      return <ValidateFormData {...props} />;
     default:
       return null;
   }

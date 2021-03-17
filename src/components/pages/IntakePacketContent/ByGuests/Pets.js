@@ -11,6 +11,7 @@ import { useHistory, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { getDocuSignUrl } from '../../../../state/actions/index';
+import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
 import { Form, Input, Checkbox, Card, Progress, Button } from 'antd';
@@ -101,22 +102,7 @@ const Pets = ({
             marginBottom: '30px',
           }}
         >
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ width: '100px' }}
-          >
-            Previous
-          </Button>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={callDocusign}
-            style={{ width: '100px' }}
-          >
-            Next
-          </Button>
+          <IntakeButton navigation={navigation} />
         </div>
 
         <Form layout="vertical">
