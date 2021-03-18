@@ -2,12 +2,12 @@ import React from 'react';
 import { Typography, Collapse } from 'antd';
 
 import RenderFamilyMembers from './RenderFamMembers';
-import formData from './mockFormValues';
+// import formData from './mockFormValues';
 
 const { Title } = Typography;
 const { Panel } = Collapse;
 
-const RenderFormData = () => {
+const RenderFormData = ({ formData, signerInfo }) => {
   const { familyInfo, familyMember } = formData;
   const {
     phone_one,
@@ -150,19 +150,22 @@ const RenderFormData = () => {
       </Collapse>
 
       <h2>Family Information:</h2>
-      {familyMember.map(member => (
-        <Collapse>
-          <Panel
-            header={
-              member.demographics.first_name +
-              ' ' +
-              member.demographics.last_name
-            }
-          >
-            <RenderFamilyMembers member={member} />
-          </Panel>
-        </Collapse>
-      ))}
+      {familyMember
+        ? Object.keys(familyMember).map((member, key) => (
+            <Collapse>
+              <Panel
+                key={key}
+                header={
+                  member.demographics.first_name +
+                  ' ' +
+                  member.demographics.last_name
+                }
+              >
+                <RenderFamilyMembers member={member} />
+              </Panel>
+            </Collapse>
+          ))
+        : null}
     </div>
   );
 };
