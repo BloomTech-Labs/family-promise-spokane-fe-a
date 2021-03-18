@@ -22,7 +22,7 @@ import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
 import Pets from './IntakePacketContent/ByGuests/Pets';
-import ValidateFormData from './IntakePacketContent/ByGuests/ValidateFormData';
+import ValidateFormData from './IntakePacketContent/ByGuests/ValidateForm/ValidateFormData';
 
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/

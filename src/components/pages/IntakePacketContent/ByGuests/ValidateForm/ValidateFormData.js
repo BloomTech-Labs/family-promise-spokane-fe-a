@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { axiosWithAuth } from '../../../../api/axiosWithAuth';
-import { getDocuSignUrl } from '../../../../state/actions/index';
+import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
+import { getDocuSignUrl } from '../../../../../state/actions/index';
 
 import { Progress, Button } from 'antd';
+
+import RenderFormData from './RenderFormData';
 
 const ValidateFormData = ({
   navigation,
@@ -82,6 +84,7 @@ const ValidateFormData = ({
     }
   };
 
+  console.log(formData);
   return (
     <div style={tempFormStyle}>
       <h2>Placeholder for Data Validation</h2>
@@ -109,6 +112,9 @@ const ValidateFormData = ({
         >
           Next
         </Button>
+      </div>
+      <div className="formDataContainer">
+        <RenderFormData formData={formData} signerInfo={signerInfo} />
       </div>
     </div>
   );
