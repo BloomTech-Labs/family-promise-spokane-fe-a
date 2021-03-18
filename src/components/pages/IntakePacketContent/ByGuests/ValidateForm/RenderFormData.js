@@ -161,7 +161,7 @@ const RenderFormData = ({ formData, signerInfo }) => {
                   familyMember[member].demographics.last_name
                 }
               >
-                <RenderFamilyMembers member={member} />
+                <RenderFamilyMembers member={familyMember[member]} />
               </Panel>
             </Collapse>
           ))}
