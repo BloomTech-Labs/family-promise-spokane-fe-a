@@ -148,23 +148,25 @@ const RenderFormData = ({ formData, signerInfo }) => {
         )}
       </Collapse>
 
-      <h2>Family Information:</h2>
-      {familyMember
-        ? Object.keys(familyMember).map((member, key) => (
+      {familyMember ? (
+        <>
+          <h2>Family Information:</h2>
+          {Object.keys(familyMember).map((member, key) => (
             <Collapse>
               <Panel
                 key={key}
                 header={
-                  member.demographics.first_name +
+                  familyMember[member].demographics.first_name +
                   ' ' +
-                  member.demographics.last_name
+                  familyMember[member].demographics.last_name
                 }
               >
                 <RenderFamilyMembers member={member} />
               </Panel>
             </Collapse>
-          ))
-        : null}
+          ))}
+        </>
+      ) : null}
     </div>
   );
 };

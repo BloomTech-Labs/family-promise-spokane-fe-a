@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
 import { getDocuSignUrl } from '../../../../../state/actions/index';
@@ -8,6 +8,8 @@ import { getDocuSignUrl } from '../../../../../state/actions/index';
 import { Progress, Button } from 'antd';
 
 import RenderFormData from './RenderFormData';
+
+import '../../../../../styles/IntakePacket/_validate-form-data.scss';
 
 const ValidateFormData = ({
   navigation,
