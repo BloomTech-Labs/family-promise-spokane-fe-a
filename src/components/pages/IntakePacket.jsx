@@ -108,18 +108,18 @@ let defaultData = {
 
 // Navigation path for intake form. Each name coresponds with the switch statement id.
 const steps = [
-  { id: 'IntakeStart' },
-  { id: 'FamilyMembers' },
-  { id: 'ContactInfo' },
-  { id: 'FamilyDemographics' },
-  { id: 'RaceEthnicityInfo' },
-  { id: 'BarriersPage' },
-  { id: 'ChildSchoolInfo' },
-  { id: 'DomesticViolence' },
-  { id: 'HomelessHistory' },
-  { id: 'Insurance' },
-  { id: 'AdditionalInfo' },
-  { id: 'Pets' },
+  // { id: 'IntakeStart' },
+  // { id: 'FamilyMembers' },
+  // { id: 'ContactInfo' },
+  // { id: 'FamilyDemographics' },
+  // { id: 'RaceEthnicityInfo' },
+  // { id: 'BarriersPage' },
+  // { id: 'ChildSchoolInfo' },
+  // { id: 'DomesticViolence' },
+  // { id: 'HomelessHistory' },
+  // { id: 'Insurance' },
+  // { id: 'AdditionalInfo' },
+  // { id: 'Pets' },
   { id: 'ValidateFormData' },
 ];
 
@@ -156,9 +156,9 @@ const IntakePacket = () => {
     step,
   };
 
-  if (!userId) {
-    return <CreateOktaAccountForm setUserId={setUserId} />;
-  }
+  // if (!userId) {
+  //   return <CreateOktaAccountForm setUserId={setUserId} />;
+  // }
   formData.familyInfo.user_id = userId;
 
   //Returns component based on useStep hook step.

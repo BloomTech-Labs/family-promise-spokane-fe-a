@@ -21,7 +21,6 @@ const ValidateFormData = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  //Clone functionality from pets to redirect to docusign upon completeion
 
   //docusign
   const signerInfo = useSelector(state => state.SIGNER_INFORMATION);
@@ -84,7 +83,6 @@ const ValidateFormData = ({
     }
   };
 
-  console.log(formData);
   return (
     <div style={tempFormStyle}>
       <h2>Placeholder for Data Validation</h2>

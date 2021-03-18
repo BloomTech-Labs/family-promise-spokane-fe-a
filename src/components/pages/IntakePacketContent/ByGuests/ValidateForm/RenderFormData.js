@@ -1,9 +1,11 @@
 import React from 'react';
 import { Card, Typography, Checkbox } from 'antd';
 
+import formData from './mockFormValues';
+
 const { Title } = Typography;
 
-const RenderFormData = ({ formData, signerInfo }) => {
+const RenderFormData = () => {
   const { familyInfo, familyMember } = formData;
   const {
     phone_one,
@@ -21,13 +23,13 @@ const RenderFormData = ({ formData, signerInfo }) => {
   return (
     <div>
       <h3>Form Data Goes Here</h3>
-      <Card title="User Information">
+      {/* <Card title="User Information">
         <ul>
           <li>First Name:{signerInfo.first_name}</li>
           <li>Last Name:{signerInfo.last_name}</li>
           <li>Email: {signerInfo.email}</li>
         </ul>
-      </Card>
+      </Card> */}
       <Card
         title="Contact Information"
         headStyle={{ fontSize: '1.5rem', fontWeight: 'bold' }}
