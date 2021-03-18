@@ -5,7 +5,6 @@
 
 // array to hold all values
 const allValues = [];
-
 // array to hold all incomplete values
 const incompleteFields = [];
 
