@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography } from 'antd';
+import { Card, Typography, Checkbox } from 'antd';
 
 const { Title } = Typography;
 
@@ -50,6 +50,11 @@ const RenderFormData = ({ formData, signerInfo }) => {
               : 'Do Not Leave Messages'}
           </li>
         </ul>
+        <Title level={5}>Emergency Contact</Title>
+        <ul>
+          <li>Name: {emergencyContact.name}</li>
+          <li>Phone Number: {emergencyContact.number}</li>
+        </ul>
       </Card>
       <Card
         title="Vehicle Information"
@@ -91,6 +96,29 @@ const RenderFormData = ({ formData, signerInfo }) => {
             {homeless_info.homeless_start_date}
           </li>
         </ul>
+      </Card>
+      <Card
+        title="Benefits and Insurance"
+        headStyle={{ fontSize: '1.25rem', fontWeight: 'bold' }}
+      >
+        <Title level={5}>Government Benefits you receive:</Title>
+        <ul>
+          {gov_benefits.RRH ? <li>RRH</li> : null}
+          {gov_benefits.snap ? <li>SNAP</li> : null}
+          {gov_benefits.cps_fps ? <li>CPS/ FPS</li> : null}
+          {gov_benefits.foodstamps ? <li>Food Stamps</li> : null}
+          {gov_benefits.housing_voucher ? <li>Housing Voucher</li> : null}
+          {gov_benefits.veteran_services ? <li>veteran_services</li> : null}
+        </ul>
+        {insurance.has_insurance ? (
+          <>
+            <Title level={5}>Insurance</Title>
+            <ul>
+              <li>Members Covered under plan: {insurance.members_covered}</li>
+              <li>Insurance Type: {insurance.health_insurance_type}</li>
+            </ul>
+          </>
+        ) : null}
       </Card>
     </div>
   );
