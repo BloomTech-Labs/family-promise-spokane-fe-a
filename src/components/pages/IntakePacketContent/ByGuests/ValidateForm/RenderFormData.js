@@ -2,7 +2,6 @@ import React from 'react';
 import { Typography, Collapse } from 'antd';
 
 import RenderFamilyMembers from './RenderFamMembers';
-// import formData from './mockFormValues';
 
 const { Title } = Typography;
 const { Panel } = Collapse;
