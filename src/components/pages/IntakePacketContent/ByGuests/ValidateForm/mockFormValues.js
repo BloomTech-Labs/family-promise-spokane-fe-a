@@ -61,8 +61,8 @@ const mockFormValues = {
     pets: {
       shelter: true,
       amount: {
-        value1: false,
-        value2: false,
+        value1: true,
+        value2: true,
       },
       dog: true,
       cat: false,

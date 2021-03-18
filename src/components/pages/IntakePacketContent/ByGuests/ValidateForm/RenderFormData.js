@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Typography, Collapse } from 'antd';
+import { Typography, Collapse } from 'antd';
 
+import RenderFamilyMembers from './RenderFamMembers';
 import formData from './mockFormValues';
+import DomesticViolence from '../DomesticViolence';
 
 const { Title } = Typography;
 const { Panel } = Collapse;
@@ -112,7 +114,46 @@ const RenderFormData = () => {
             </>
           ) : null}
         </Panel>
+        {domestic_violence_info.fleeing_dv && (
+          <Panel header="Domestic Violence Information" key="5">
+            <ul>
+              <li>
+                Have you contacted the YWCA:{' '}
+                {domestic_violence_info.YWCA_contacted ? 'Yes' : 'No'}
+              </li>
+              <li>
+                Do you have a court ordered restraining order:{' '}
+                {domestic_violence_info.has_court_order ? 'Yes' : 'No'}{' '}
+              </li>
+              <li>
+                Date of Last Incident:{' '}
+                {domestic_violence_info.date_last_incident}
+              </li>
+              <li>
+                Are you handeling you DV issue anonymously:{' '}
+                {domestic_violence_info.anonymity_preferred ? 'Yes' : 'No'}{' '}
+              </li>
+            </ul>
+          </Panel>
+        )}
+        {pets.shelter && (
+          <Panel header="Pets" key="6">
+            <ul>
+              <li>Name: {pets.name_one}</li>
+              <li>Type: {pets.dog ? 'Dog' : 'Cat'}</li>
+              <li>Service Animal: {pets.service_animal ? 'Yes' : 'No'}</li>
+              <li>
+                Emotional Support Animal: {pets.support_animal ? 'Yes' : 'No'}
+              </li>
+            </ul>
+          </Panel>
+        )}
       </Collapse>
+
+      <h2>Family Information:</h2>
+      {familyMember.map(member => (
+        <RenderFamilyMembers member={member} />
+      ))}
     </div>
   );
 };
