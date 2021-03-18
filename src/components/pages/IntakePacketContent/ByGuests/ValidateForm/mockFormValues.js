@@ -93,12 +93,7 @@ const mockFormValues = {
           child_support: null,
           other: null,
         },
-        race: [
-          'Hispanic/Latino',
-          'Hispanic/Latino',
-          'American Indian or Alaska Native',
-          'Hispanic/Latino',
-        ],
+        race: ['Hispanic/Latino', 'American Indian or Alaska Native'],
         ethnicity: null,
         employer: 500,
       },

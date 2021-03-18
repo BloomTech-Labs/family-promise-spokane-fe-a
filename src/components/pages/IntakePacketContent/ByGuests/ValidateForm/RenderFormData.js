@@ -3,7 +3,6 @@ import { Typography, Collapse } from 'antd';
 
 import RenderFamilyMembers from './RenderFamMembers';
 import formData from './mockFormValues';
-import DomesticViolence from '../DomesticViolence';
 
 const { Title } = Typography;
 const { Panel } = Collapse;
@@ -152,7 +151,17 @@ const RenderFormData = () => {
 
       <h2>Family Information:</h2>
       {familyMember.map(member => (
-        <RenderFamilyMembers member={member} />
+        <Collapse>
+          <Panel
+            header={
+              member.demographics.first_name +
+              ' ' +
+              member.demographics.last_name
+            }
+          >
+            <RenderFamilyMembers member={member} />
+          </Panel>
+        </Collapse>
       ))}
     </div>
   );
