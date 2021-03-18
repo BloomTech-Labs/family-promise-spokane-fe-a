@@ -20,7 +20,7 @@ const RenderFormData = ({ formData, signerInfo }) => {
     domestic_violence_info,
     pets,
   } = familyInfo;
-
+  console.log(familyInfo);
   return (
     <div>
       <h2>Lets make sure all your information is correct!</h2>

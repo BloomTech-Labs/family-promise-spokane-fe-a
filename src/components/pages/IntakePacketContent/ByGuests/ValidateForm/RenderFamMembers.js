@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 const RenderFamilyMembers = ({ member }) => {
   const { demographics, race, barriers, schools } = member;
-
+  console.log(member);
   return (
     <div>
       <Title level={5}>Basic Information</Title>
