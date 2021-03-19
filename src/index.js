@@ -14,7 +14,7 @@ import 'dotenv';
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
-import EditGuestInformation from './components/pages/guest-pages/EditGuestInformation';
+import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
 import { LandingPage } from './components/pages/Landing';
