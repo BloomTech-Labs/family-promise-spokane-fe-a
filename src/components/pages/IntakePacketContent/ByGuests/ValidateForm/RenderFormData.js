@@ -21,6 +21,7 @@ const RenderFormData = ({ formData, signerInfo }) => {
     pets,
   } = familyInfo;
 
+  console.log(familyMember);
   return (
     <div>
       <h2>Lets make sure all your information is correct!</h2>
@@ -150,7 +151,6 @@ const RenderFormData = ({ formData, signerInfo }) => {
 
       {familyMember ? (
         <>
-          <h2>Family Information:</h2>
           {Object.keys(familyMember).map((member, key) => (
             <Collapse>
               <Panel
