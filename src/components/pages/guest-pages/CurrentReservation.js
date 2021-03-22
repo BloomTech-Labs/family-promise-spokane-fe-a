@@ -3,6 +3,7 @@ import { Typography } from 'antd';
 import { Checkbox, Button } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import '../../../styles/app.scss';
+
 const CurrentReservation = ({ membersStaying, cancelButton, beds }) => {
   const { Text } = Typography;
   return (
