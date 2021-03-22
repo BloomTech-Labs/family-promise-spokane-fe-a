@@ -108,17 +108,17 @@ let defaultData = {
 
 // Navigation path for intake form. Each name coresponds with the switch statement id.
 const steps = [
-  // { id: 'IntakeStart' },
-  // { id: 'FamilyMembers' },
-  // { id: 'ContactInfo' },
-  // { id: 'FamilyDemographics' },
-  // { id: 'RaceEthnicityInfo' },
-  // { id: 'BarriersPage' },
-  // { id: 'ChildSchoolInfo' },
-  // { id: 'DomesticViolence' },
-  // { id: 'HomelessHistory' },
-  // { id: 'Insurance' },
-  // { id: 'AdditionalInfo' },
+  { id: 'IntakeStart' },
+  { id: 'FamilyMembers' },
+  { id: 'ContactInfo' },
+  { id: 'FamilyDemographics' },
+  { id: 'RaceEthnicityInfo' },
+  { id: 'BarriersPage' },
+  { id: 'ChildSchoolInfo' },
+  { id: 'DomesticViolence' },
+  { id: 'HomelessHistory' },
+  { id: 'Insurance' },
+  { id: 'AdditionalInfo' },
   { id: 'Pets' },
   { id: 'ValidateFormData' },
 ];
@@ -156,35 +156,35 @@ const IntakePacket = () => {
     step,
   };
 
-  // if (!userId) {
-  //   return <CreateOktaAccountForm setUserId={setUserId} />;
-  // }
+  if (!userId) {
+    return <CreateOktaAccountForm setUserId={setUserId} />;
+  }
   formData.familyInfo.user_id = userId;
 
   //Returns component based on useStep hook step.
   switch (id) {
-    // case 'IntakeStart':
-    //   return <IntakeStart {...props} />;
-    // case 'ContactInfo':
-    //   return <ContactInfo {...props} />;
-    // case 'FamilyMembers':
-    //   return <FamilyMembers {...props} />;
-    // case 'FamilyDemographics':
-    //   return <FamilyDemographics {...props} />;
-    // case 'RaceEthnicityInfo':
-    //   return <RaceEthnicityInfo {...props} />;
-    // case 'BarriersPage':
-    //   return <BarriersPage {...props} />;
-    // case 'ChildSchoolInfo':
-    //   return <ChildSchoolInfo {...props} />;
-    // case 'DomesticViolence':
-    //   return <DomesticViolence {...props} />;
-    // case 'HomelessHistory':
-    //   return <HomelessHistory {...props} />;
-    // case 'Insurance':
-    //   return <Insurance {...props} />;
-    // case 'AdditionalInfo':
-    //   return <AdditionalInfo {...props} />;
+    case 'IntakeStart':
+      return <IntakeStart {...props} />;
+    case 'ContactInfo':
+      return <ContactInfo {...props} />;
+    case 'FamilyMembers':
+      return <FamilyMembers {...props} />;
+    case 'FamilyDemographics':
+      return <FamilyDemographics {...props} />;
+    case 'RaceEthnicityInfo':
+      return <RaceEthnicityInfo {...props} />;
+    case 'BarriersPage':
+      return <BarriersPage {...props} />;
+    case 'ChildSchoolInfo':
+      return <ChildSchoolInfo {...props} />;
+    case 'DomesticViolence':
+      return <DomesticViolence {...props} />;
+    case 'HomelessHistory':
+      return <HomelessHistory {...props} />;
+    case 'Insurance':
+      return <Insurance {...props} />;
+    case 'AdditionalInfo':
+      return <AdditionalInfo {...props} />;
     case 'Pets':
       return <Pets {...props} />;
     case 'ValidateFormData':
