@@ -96,8 +96,6 @@ const ValidateFormData = ({
   };
 
   const onChange = e => {
-    e.stopPropagation();
-
     setConfirmed(!confirmed);
   };
 
