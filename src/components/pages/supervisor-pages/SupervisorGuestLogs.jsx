@@ -198,7 +198,7 @@ const Guests = ({ guestsCheckedInCount, setGuestsCheckedInCount }) => {
                 icon: InfoOutlinedIcon,
                 tooltip: 'More Info',
                 onClick: (event, rowData) => {
-                  setResult(rowData); // BUG HERE -- Not getting correct data -Meg
+                  setResult(rowData);
                   toggleModal(event);
                   // Do save operation
                 },
