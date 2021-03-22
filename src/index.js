@@ -17,7 +17,6 @@ import { NotFoundPage } from './components/pages/NotFound';
 import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
-import { LandingPage } from './components/pages/Landing';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
@@ -78,7 +77,6 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
-        <Route path="/landing" component={LandingPage} />
         {/* This is the route for the redirect to DocuSign's web application */}
         <Route
           exact

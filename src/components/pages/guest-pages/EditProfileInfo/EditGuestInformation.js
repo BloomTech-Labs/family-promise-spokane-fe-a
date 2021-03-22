@@ -42,7 +42,8 @@ const EditGuestInformation = ({ fetchHousehold, fetchMembers }) => {
 
   useEffect(() => {
     fetchMembersData();
-  }, [familyInfo, fetchMembersData]);
+    // eslint-disable-next-line
+  }, [familyInfo]);
 
   const StyledEditForm = styled.div`
     max-width: 750px;
