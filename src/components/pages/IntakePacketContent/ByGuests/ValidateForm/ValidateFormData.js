@@ -5,11 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
 import { getDocuSignUrl } from '../../../../../state/actions/index';
 
-import { Progress, Button } from 'antd';
+import { Progress, Button, Card, Checkbox } from 'antd';
 
 import RenderFormData from './RenderFormData';
 
 import '../../../../../styles/IntakePacket/_validate-form-data.scss';
+
+// const mockSignerInfo = {
+//   email: 'mockemail@test.com',
+//   first_name: 'Test',
+//   last_name: 'Guest',
+//   id: '80ddfhweri8988jf',
+// };
 
 const ValidateFormData = ({
   navigation,
@@ -19,6 +26,7 @@ const ValidateFormData = ({
   steps,
   step,
 }) => {
+  const [confirmed, setConfirmed] = useState(false);
   //Progress bar
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
@@ -26,6 +34,8 @@ const ValidateFormData = ({
 
   //docusign
   const signerInfo = useSelector(state => state.SIGNER_INFORMATION);
+  // const signerInfo = mockSignerInfo;
+
   let envelopeArgs = {
     signer1Email: signerInfo.email,
     signer1Name: signerInfo.first_name + ' ' + signerInfo.last_name,
@@ -85,37 +95,46 @@ const ValidateFormData = ({
     }
   };
 
+  const onChange = e => {
+    setConfirmed(!confirmed);
+  };
+
   return (
     <div style={tempFormStyle}>
-      <h2>Placeholder for Data Validation</h2>
       <Progress percent={percent} status="active" showInfo={false} />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          marginBottom: '30px',
-        }}
-      >
-        <Button
-          type="primary"
-          htmlType="button"
-          onClick={previous}
-          style={{ width: '100px' }}
+      <Card title={'Check Information'} bordered={false}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '30px',
+          }}
         >
-          Previous
-        </Button>
-        <Button
-          type="primary"
-          htmlType="button"
-          onClick={callDocusign}
-          style={{ width: '100px' }}
-        >
-          Next
-        </Button>
-      </div>
-      <div className="formDataContainer">
-        <RenderFormData formData={formData} signerInfo={signerInfo} />
-      </div>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ width: '100px' }}
+          >
+            Previous
+          </Button>
+          <Button
+            type="primary"
+            htmlType="button"
+            disabled={!confirmed}
+            onClick={callDocusign}
+            style={{ width: '100px' }}
+          >
+            Sign Forms
+          </Button>
+        </div>
+        <div className="formDataContainer">
+          <RenderFormData formData={formData} signerInfo={signerInfo} />
+        </div>
+        <Checkbox checked={confirmed} onChange={onChange}>
+          I have checked all the information and verify it is correct
+        </Checkbox>
+      </Card>
     </div>
   );
 };
