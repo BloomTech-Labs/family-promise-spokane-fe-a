@@ -14,10 +14,9 @@ import 'dotenv';
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
-
+import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
-import { LandingPage } from './components/pages/Landing';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
@@ -41,7 +40,7 @@ import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
-import clientStaffSig from './components/pages/IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
+import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
 import { LastLocationProvider } from 'react-router-last-location';
 import DailyChecklist from './components/pages/guest-pages/DailyChecklist';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
@@ -79,7 +78,6 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
-        <Route path="/landing" component={LandingPage} />
         {/* This is the route for the redirect to DocuSign's web application */}
         <Route
           exact
@@ -167,9 +165,12 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={FamilyProfile}
         />
-
+        <PrivateRoute
+          path="/EditInformation/:familyId"
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={EditGuestInformation}
+        />
         <PrivateRoute path="/family" roles={['guest']} component={FamilyPage} />
-
         <SecureRoute
           path="/"
           exact
