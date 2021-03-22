@@ -37,6 +37,7 @@ const GuestAnalytics = ({
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
+    console.log(percent);
     setPercentComplete(percent[0]);
     setMissingFields(percent[1]);
     // eslint-disable-next-line
@@ -54,7 +55,6 @@ const GuestAnalytics = ({
         modified.slice(1).split('_').join(' ')
       );
     });
-
     let modifiedStringValues = [];
 
     // builds an array of messages to render
@@ -66,7 +66,6 @@ const GuestAnalytics = ({
     return modifiedStringValues;
   };
 
-  console.log('anal ', formatMissingData());
   return (
     <div className="analytics-container">
       <div className="progess-container">

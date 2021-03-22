@@ -41,7 +41,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       setIsReserved(true);
       setResID(log.reservation_id);
     }
-  }, [fullDate, log]);
+    // eslint-disable-next-line
+  }, []);
 
   const { Text } = Typography;
 
@@ -122,7 +123,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     fetchFamilyInformation()
       .then(res => console.log(res))
       .catch(err => console.log('ERROR IN GLOBAL COUNT USE EFFECT', err));
-  }, [fetchFamilyInformation, globalCount]);
+  }, [fetchFamilyInformation]);
 
   //Reserve button - Will post to the logs endpoint with the membersStaying , will set isReserved to true, will return the reservation ID for put requeset, Confirm that the user has made a reservation.
   const reserveButton = e => {
@@ -290,7 +291,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //-----------------------------------------------------------------
   // --------------------------START OF RENDER-----------------------
   //-----------------------------------------------------------------
-  console.log(isReserved);
   return 7 < hours < 21 ? (
     <div className="guest-container">
       <div className="checkin-area">
@@ -337,11 +337,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
                 </div>
               );
             })}
-
             <Button shape="round" className="reservation-button">
               Reserve Beds
             </Button>
-
             <p>
               Message: Please be sure to arrive at the shelter by 7pm. The
               supervisor will announce if there are any more beds available

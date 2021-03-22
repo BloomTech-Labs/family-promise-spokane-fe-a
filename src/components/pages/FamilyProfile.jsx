@@ -4,9 +4,8 @@ This component contains:
   -Informatin for family
   -**does NOT include info for individual member
 */
-
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Members from '../pages/guest-pages/Members';
 
 //Ant Design imports (https://ant.design/components/overview/)
@@ -44,7 +43,7 @@ const tabListNoTitle = [
 
 const FamilyProfile = ({ familyInfo, fetchFamily }) => {
   const params = useParams();
-
+  const { push } = useHistory();
   const familyId = params.familyId;
 
   useEffect(() => {
@@ -226,6 +225,10 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
     };
   }
 
+  const editInfo = e => {
+    push('/EditInformation/:familyId');
+  };
+
   return (
     <div className="user-container">
       <div className="profile-header-container">
@@ -234,6 +237,7 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
           src={familyInfo?.avatar_url}
         />
       </div>
+      <button onClick={editInfo}>Edit Family Information</button>
       <Card
         style={{ width: '100%' }}
         tabList={tabListNoTitle}
@@ -244,6 +248,7 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
       >
         {contentListNoTitle[tab.noTitleKey]}
       </Card>
+      {/* <button onClick={push('/EditInformation/:familyId')}>Edit Family Information</button> */}
     </div>
   );
 };

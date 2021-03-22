@@ -20,17 +20,11 @@ const RenderFormData = ({ formData, signerInfo }) => {
     domestic_violence_info,
     pets,
   } = familyInfo;
-
+  console.log('FAMILY INFO ', familyInfo);
+  console.log('FORM DATA ', formData);
   return (
     <div>
       <h2>Lets make sure all your information is correct!</h2>
-      {/* <Card title="User Information">
-        <ul>
-          <li>First Name:{signerInfo.first_name}</li>
-          <li>Last Name:{signerInfo.last_name}</li>
-          <li>Email: {signerInfo.email}</li>
-        </ul>
-      </Card> */}
       <Collapse defaultActiveKey={['1']}>
         <Panel header="Contact Information" key="1">
           <Title level={5}>{phone_one.name}</Title>

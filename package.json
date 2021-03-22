@@ -50,7 +50,7 @@
     "storybook": "start-storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix --fix-type suggestion --fix-type problem",
+    "lint:fix": "eslint --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\""
   },
   "eslintConfig": {

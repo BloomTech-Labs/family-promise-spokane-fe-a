@@ -5,8 +5,8 @@ import { Typography } from 'antd';
 const { Title } = Typography;
 
 const RenderFamilyMembers = ({ member }) => {
-  const { demographics, race, barriers, schools } = member;
-
+  const { demographics, barriers, schools } = member;
+  console.log(member);
   return (
     <div>
       <Title level={5}>Basic Information</Title>

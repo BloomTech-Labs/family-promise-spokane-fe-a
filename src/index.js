@@ -14,7 +14,7 @@ import 'dotenv';
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
-
+import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
 import { LandingPage } from './components/pages/Landing';
@@ -160,9 +160,12 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={FamilyProfile}
         />
-
+        <PrivateRoute
+          path="/EditInformation/:familyId"
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={EditGuestInformation}
+        />
         <PrivateRoute path="/family" roles={['guest']} component={FamilyPage} />
-
         <SecureRoute
           path="/"
           exact
