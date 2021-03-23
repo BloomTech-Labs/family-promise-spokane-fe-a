@@ -15,7 +15,7 @@ const FamilyMembers = () => {
   //const [familyInfo, setFamilyInfo] = useState({});
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'relationship', field: 'relationship' },
