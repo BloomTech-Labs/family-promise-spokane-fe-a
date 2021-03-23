@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom';
-
+import styled from 'styled-components';
 import MaterialTable from 'material-table';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
+
 import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
-import { tableIcons } from '../../../utils/tableIcons';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Paper } from '@material-ui/core';
-import styled from 'styled-components';
-// import CardShadow from '../../CardShadow';
+
+import './guest.css';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+import { tableIcons } from '../../../utils/tableIcons';
 import FlagGuest from '../../modals/FlagGuest';
 import GuestNotes from '../../modals/GuestNotes';
-// import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
-import Modal from 'react-modal';
-import './guest.css';
-// import { CardContent, Card } from '@material-ui/core';
 import GuestMoreInfo from './GuestMoreInfo';
+
 Modal.setAppElement('#root');
 
 const Guests = () => {
+  const [isFlagOpen, setIsFlagOpen] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [guestId, setGuestId] = useState(null);
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
@@ -35,10 +38,8 @@ const Guests = () => {
     ],
     data: [],
   });
-  function toggleModal(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
+
+  const history = useHistory();
 
   useEffect(() => {
     axiosWithAuth()
@@ -57,7 +58,6 @@ const Guests = () => {
             ...member,
           };
         });
-
         copy.data.push(...formattedData);
         console.log(copy);
 
@@ -74,12 +74,6 @@ const Guests = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
-
   if (loading) {
     return (
       <div className="guest-table-container">
@@ -94,6 +88,13 @@ const Guests = () => {
       margin-left: 11%;
     }
   `;
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+    setResult(null);
+  };
+
+  //TODO will have to set result to empty when done with modal
 
   return (
     <TitleStyled>
@@ -169,7 +170,7 @@ const Guests = () => {
                 tooltip: 'More Info',
                 onClick: (event, rowData) => {
                   setResult(rowData);
-                  toggleModal(event);
+                  setIsOpen(!isOpen);
                   // Do save operation
                 },
               },

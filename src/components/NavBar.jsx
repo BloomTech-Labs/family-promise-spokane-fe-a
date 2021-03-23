@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { useOktaAuth } from '@okta/okta-react';
 import { Avatar, Menu, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+  const family = useSelector(state => state.FAMILY);
+
   const history = useHistory();
-  const [idRoute, setIdRoute] = useState(null);
   const { authState, authService } = useOktaAuth();
 
   const redirectToLogin = () => {
@@ -30,7 +32,8 @@ const NavBar = () => {
   const goToProfile = () => {
     // We pass this to our <Security /> component that wraps our routes.
     // It'll automatically check if userToken is available and push back to login if not :)
-    history.push(`/familyprofile/${idRoute}`);
+    history.push(`/familyprofile/${family.id}`);
+    console.log(family);
   };
 
   const menu = (
