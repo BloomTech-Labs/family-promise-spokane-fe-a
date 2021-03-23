@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import MaterialTable from 'material-table';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
+import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import MaterialTable from 'material-table';
+
 import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
-import { tableIcons } from '../../../utils/tableIcons';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Paper } from '@material-ui/core';
-import styled from 'styled-components';
+
+import './guest.css';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+import { tableIcons } from '../../../utils/tableIcons';
 import FlagGuest from '../../modals/FlagGuest';
 import GuestNotes from '../../modals/GuestNotes';
 import LoadingComponent from '../../common/LoadingComponent';
-import Modal from 'react-modal';
-import './guest.css';
 import GuestMoreInfo from './GuestMoreInfo';
+
 Modal.setAppElement('#root');
 
 const Guests = () => {
@@ -22,7 +25,7 @@ const Guests = () => {
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [guestId, setGuestId] = useState(null);
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
@@ -64,7 +67,9 @@ const Guests = () => {
         alert('error');
       })
       .finally(() => {
-        setLoading(false);
+        if (loading) {
+          setLoading(false);
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -84,11 +89,18 @@ const Guests = () => {
     }
   `;
 
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+    setResult(null);
+  };
+
+  //TODO will have to set result to empty when done with modal
+
   return (
     <TitleStyled>
       <Modal
         isOpen={isOpen}
-        // onRequestClose={!isOpen}
+        onRequestClose={toggleModal}
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
@@ -115,9 +127,9 @@ const Guests = () => {
               exportButton: true,
               rowStyle: rowData => ({
                 backgroundColor:
-                  rowData.flag_level == 2
+                  rowData.flag_level === 2
                     ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
+                    : rowData.flag_level === 3
                     ? 'rgba(255, 0, 0, 0.418)'
                     : 'white',
               }),

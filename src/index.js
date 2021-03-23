@@ -48,9 +48,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <LastLocationProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <App />
       </LastLocationProvider>
     </Router>
   </Provider>,
