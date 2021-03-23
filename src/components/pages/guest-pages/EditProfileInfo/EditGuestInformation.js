@@ -45,7 +45,7 @@ const EditGuestInformation = ({ fetchHousehold, fetchMembers }) => {
   }, [familyInfo, fetchMembersData]);
 
   const StyledEditForm = styled.div`
-    max-width: 750px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -81,6 +81,7 @@ const mapDispatchToProps = {
   fetchHousehold: actions.fetchHousehold,
   fetchMembers: actions.fetchMembers,
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

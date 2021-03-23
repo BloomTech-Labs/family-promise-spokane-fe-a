@@ -286,7 +286,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       setSeconds(sec);
     }, 1000);
     return () => clearInterval(interval);
-  }, [sec, seconds]);
+  }, [sec]);
 
   //-----------------------------------------------------------------
   // --------------------------START OF RENDER-----------------------
