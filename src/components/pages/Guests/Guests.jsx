@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { useHistory } from 'react-router-dom';
 import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
@@ -21,11 +22,11 @@ import GuestMoreInfo from './GuestMoreInfo';
 Modal.setAppElement('#root');
 
 const Guests = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'Relationship', field: 'relationship' },
@@ -66,7 +67,9 @@ const Guests = () => {
         alert('error');
       })
       .finally(() => {
-        setLoading(false);
+        if (loading) {
+          setLoading(false);
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -123,9 +126,9 @@ const Guests = () => {
               exportButton: true,
               rowStyle: rowData => ({
                 backgroundColor:
-                  rowData.flag_level == 2
+                  rowData.flag_level === 2
                     ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
+                    : rowData.flag_level === 3
                     ? 'rgba(255, 0, 0, 0.418)'
                     : 'white',
               }),
