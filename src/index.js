@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -7,12 +6,19 @@ import {
   useHistory,
   Switch,
 } from 'react-router-dom';
+import { rootReducer } from './state/reducers/index';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { Provider, useSelector } from 'react-redux';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 
-import PrivateRoute from './utils/auth/PrivateRoute';
 import 'dotenv';
+
+import './styles/app.scss';
 import 'antd/dist/antd.less';
 
+import PrivateRoute from './utils/auth/PrivateRoute';
 import { NotFoundPage } from './components/pages/NotFound';
 import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
@@ -27,13 +33,6 @@ import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
 import SupervisorCheckIn from './components/pages/supervisor-pages/SupervisorCheckIn';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
-import './styles/app.scss';
-import { rootReducer } from './state/reducers/index';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import { Provider, useSelector } from 'react-redux';
-// import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
@@ -42,6 +41,7 @@ import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnaly
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
 import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
 import { LastLocationProvider } from 'react-router-last-location';
+
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(

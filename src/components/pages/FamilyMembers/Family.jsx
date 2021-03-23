@@ -42,6 +42,7 @@ const FamilyMembers = () => {
 
       setState(copy);
     } catch (error) {
+      console.log('error family.jsx 45', error);
       alert(error);
     } finally {
       setLoading(false);

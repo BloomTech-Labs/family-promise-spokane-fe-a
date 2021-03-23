@@ -9,23 +9,24 @@ import { tableIcons } from '../../../utils/tableIcons';
 import FlagIcon from '@material-ui/icons/Flag';
 import { Paper } from '@material-ui/core';
 import styled from 'styled-components';
-// import CardShadow from '../../CardShadow';
 import FlagGuest from '../../modals/FlagGuest';
 import GuestNotes from '../../modals/GuestNotes';
-// import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
 import './guest.css';
-// import { CardContent, Card } from '@material-ui/core';
 import GuestMoreInfo from './GuestMoreInfo';
 Modal.setAppElement('#root');
 
 const Guests = () => {
+  const [isFlagOpen, setIsFlagOpen] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [guestId, setGuestId] = useState(null);
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'Relationship', field: 'relationship' },
@@ -34,10 +35,8 @@ const Guests = () => {
     ],
     data: [],
   });
-  function toggleModal(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
+
+  const history = useHistory();
 
   useEffect(() => {
     axiosWithAuth()
@@ -56,7 +55,6 @@ const Guests = () => {
             ...member,
           };
         });
-
         copy.data.push(...formattedData);
         console.log(copy);
 
@@ -70,12 +68,6 @@ const Guests = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
 
   if (loading) {
     return (
@@ -96,7 +88,7 @@ const Guests = () => {
     <TitleStyled>
       <Modal
         isOpen={isOpen}
-        onRequestClose={toggleModal}
+        // onRequestClose={!isOpen}
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
@@ -166,7 +158,7 @@ const Guests = () => {
                 tooltip: 'More Info',
                 onClick: (event, rowData) => {
                   setResult(rowData);
-                  toggleModal(event);
+                  setIsOpen(!isOpen);
                   // Do save operation
                 },
               },
