@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { useOktaAuth } from '@okta/okta-react';
