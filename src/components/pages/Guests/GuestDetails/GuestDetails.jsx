@@ -14,7 +14,6 @@ const GuestDetails = () => {
   const [memberInfo, setMemberInfo] = useState({});
   const [tabCard, setTabCard] = useState({
     key: 'tab1',
-    noTitleKey: 'app',
   });
 
   useEffect(() => {
@@ -38,11 +37,19 @@ const GuestDetails = () => {
   const tabList = [
     {
       key: 'tab1',
-      tab: 'tab1',
+      tab: 'Guest Info',
     },
     {
       key: 'tab2',
-      tab: 'tab2',
+      tab: 'Family Info',
+    },
+    {
+      key: 'tab3',
+      tab: 'Flag Guest',
+    },
+    {
+      key: 'tab4',
+      tab: 'Notes',
     },
   ];
 
@@ -51,37 +58,17 @@ const GuestDetails = () => {
     tab2: <p>content2</p>,
   };
 
-  const tabListNoTitle = [
-    {
-      key: 'article',
-      tab: 'article',
-    },
-    {
-      key: 'app',
-      tab: 'app',
-    },
-    {
-      key: 'project',
-      tab: 'project',
-    },
-  ];
-
-  const contentListNoTitle = {
-    article: <p>article content</p>,
-    app: <p>app content</p>,
-    project: <p>project content</p>,
-  };
-
   return (
     <div>
       <h1>Guest Detail Placeholder</h1>
-      <Button type="primary" onClick={() => history.push('/guests')}>
-        Back To Guest Dash
-      </Button>
       <Card
         style={{ width: '100%' }}
         title="Card title"
-        extra={<a href="#">More</a>}
+        extra={
+          <Button type="primary" onClick={() => history.push('/guests')}>
+            Back To Guest Dash
+          </Button>
+        }
         tabList={tabList}
         activeTabKey={tabCard.key}
         onTabChange={key => {
