@@ -5,6 +5,7 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 import GuestNotes from './components/GuestNotes';
 import GuestMoreInfo from './components/GuestMoreInfo';
+import Family from '../../FamilyMembers/Family';
 
 import { Button, Card, Typography } from 'antd';
 const { Title } = Typography;
@@ -65,7 +66,7 @@ const GuestDetails = () => {
     ),
     tab2: (
       <div className="tabContainer">
-        <p>Family Info</p>
+        <Family familyId={memberInfo.family_id} />
       </div>
     ),
     tab3: (
@@ -83,7 +84,7 @@ const GuestDetails = () => {
   console.log(memberInfo);
 
   return (
-    <div>
+    <div style={{ marginLeft: '14%' }}>
       <Title level={3}>Guest Detail Placeholder</Title>
       <Card
         style={{ width: '100%' }}

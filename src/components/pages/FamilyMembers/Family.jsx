@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import LoadingComponent from '../../common/LoadingComponent';
-import { useParams } from 'react-router-dom';
 import MaterialTable, { MTableToolbar } from 'material-table';
 import { useHistory } from 'react-router-dom';
 import { tableIcons } from '../../../utils/tableIcons';
 import { Button } from '@material-ui/core';
 
-const FamilyMembers = () => {
+const FamilyMembers = ({ familyId }) => {
   const history = useHistory();
-  const params = useParams();
   const [loading, setLoading] = useState(true);
   // State below is unused
   //const [familyInfo, setFamilyInfo] = useState({});
@@ -27,13 +25,13 @@ const FamilyMembers = () => {
     try {
       // eslint-disable-next-line
       const info = await axiosWithAuth()
-        .get(`/families/${params.id}`)
+        .get(`/families/${familyId}`)
         .then(res => res.data);
 
       //setFamilyInfo(info);
 
       const data = await axiosWithAuth()
-        .get(`/families/${params.id}/members`)
+        .get(`/families/${familyId}/members`)
         .then(res => res.data);
       const formattedData = data.map(member => {
         return { ...member.demographics };
@@ -88,12 +86,12 @@ const FamilyMembers = () => {
                 <MTableToolbar {...props} />
                 <div style={{ padding: '0px 10px' }}>
                   <Button
-                    onClick={() => history.push(`/families/${params.id}/notes`)}
+                    onClick={() => history.push(`/families/${familyId}/notes`)}
                   >
                     Notes
                   </Button>
                   <Button
-                    onClick={() => history.push(`/familyprofile/${params.id}`)}
+                    onClick={() => history.push(`/familyprofile/${familyId}`)}
                   >
                     Additional Information
                   </Button>
