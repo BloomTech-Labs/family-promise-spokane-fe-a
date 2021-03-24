@@ -20,6 +20,13 @@ import GuestMoreInfo from './GuestMoreInfo';
 
 Modal.setAppElement('#root');
 
+const TitleStyled = styled.div`
+  h1 {
+    margin-top: 2%;
+    margin-left: 11%;
+  }
+`;
+
 const Guests = () => {
   const [isFlagOpen, setIsFlagOpen] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
@@ -81,13 +88,6 @@ const Guests = () => {
       </div>
     );
   }
-
-  const TitleStyled = styled.div`
-    h1 {
-      margin-top: 2%;
-      margin-left: 11%;
-    }
-  `;
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
