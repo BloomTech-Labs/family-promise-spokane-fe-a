@@ -65,7 +65,7 @@ const Guests = () => {
             ...member,
           };
         });
-        copy.data.push(...formattedData);
+        copy.data = formattedData;
         console.log(copy);
 
         setState(copy);
@@ -78,6 +78,8 @@ const Guests = () => {
           setLoading(false);
         }
       });
+
+    console.log(state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
