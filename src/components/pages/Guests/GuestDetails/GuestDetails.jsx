@@ -6,9 +6,9 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import GuestNotes from './components/GuestNotes';
 import GuestMoreInfo from './components/GuestMoreInfo';
 import Family from '../../FamilyMembers/Family';
+import FamilyDetails from './components/FamilyDetails';
 
-import { Button, Card, Typography } from 'antd';
-const { Title } = Typography;
+import { Button, Card } from 'antd';
 
 const GuestDetails = () => {
   const history = useHistory();
@@ -67,6 +67,7 @@ const GuestDetails = () => {
     tab2: (
       <div className="tabContainer">
         <Family familyId={memberInfo.family_id} />
+        <FamilyDetails familyId={memberInfo.family_id} />
       </div>
     ),
     tab3: (
@@ -85,10 +86,9 @@ const GuestDetails = () => {
 
   return (
     <div style={{ marginLeft: '14%' }}>
-      <Title level={3}>Guest Detail Placeholder</Title>
       <Card
-        style={{ width: '100%' }}
-        title="Card title"
+        style={{ width: '80%', margin: '5% auto' }}
+        title="Guest and Family Details"
         extra={
           <Button type="primary" onClick={() => history.push('/guests')}>
             Back To Guest Dash

@@ -18,7 +18,6 @@ const tabListNoTitle = [
 ];
 
 const GuestMoreInfo = ({ memberInfo }) => {
-  console.log(memberInfo);
   const [tab, setTab] = useState({ key: 'tab1', noTitleKey: 'Demographics' });
 
   const onTabChange = (key, type) => {
@@ -279,7 +278,7 @@ const GuestMoreInfo = ({ memberInfo }) => {
           onTabChange(key, 'noTitleKey');
         }}
       >
-        {contentListNoTitle[tab.noTitleKey]}
+        {memberInfo ? contentListNoTitle[tab.noTitleKey] : ''}
       </Card>
     </div>
   );

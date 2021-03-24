@@ -41,7 +41,7 @@ const GuestNotes = ({ memberInfo }) => {
               Add notes
             </TextField>
             <div onClick={handleSubmit}>
-              <IconButton size="large">
+              <IconButton size="medium">
                 <AddIcon />
               </IconButton>
             </div>
