@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Guests from '../Guests/Guests';
-import SupervisorCheckIn from './SupervisorCheckIn';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+// Components
 import SupervisorGuestLogs from './SupervisorGuestLogs';
 import DevSupervisorAnalytics from './DevSupervisorAnalytics';
 // UI
@@ -9,21 +11,11 @@ import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import MaterialTable from 'material-table';
-import Circle from 'react-circle';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import axios from 'axios';
-// utils
-import { tableIcons } from '../../../utils/tableIcons';
-import { findLastIndex } from 'underscore';
+// Utils
 import { getDailyReservationLogs } from '../../../state/actions/index';
-import { red } from 'kleur';
 
 const useStyles = makeStyles({
   bigContainer: {
