@@ -16,7 +16,7 @@ const LoginContainer = () => {
       registration: {
         // there is more we can do to handle some errors here.
       },
-      features: { registration: false },
+      features: { registration: true },
       // turning this feature on allows your widget to use Okta for user registration
       logo: logo,
       // add your custom logo to your signing/register widget here.
@@ -31,9 +31,6 @@ const LoginContainer = () => {
         issuer,
         display: 'popup',
         scopes,
-      },
-      features: {
-        registration: true,
       },
       idpDiscovery: true,
       idpDisplay: 'SECONDARY',
