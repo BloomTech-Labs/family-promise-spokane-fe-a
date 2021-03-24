@@ -66,7 +66,6 @@ const GuestDetails = () => {
     ),
     tab2: (
       <div className="tabContainer">
-        <Family familyId={memberInfo.family_id} />
         <FamilyDetails familyId={memberInfo.family_id} />
       </div>
     ),

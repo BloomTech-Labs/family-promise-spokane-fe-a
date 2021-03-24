@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
 
+import { Collapse, Typography } from 'antd';
+
+const { Title } = Typography;
+const { Panel } = Collapse;
+
 const FamilyDetails = ({ familyId }) => {
   const [membersInfo, setMembersInfo] = useState([]);
 
@@ -25,7 +30,19 @@ const FamilyDetails = ({ familyId }) => {
 
   return (
     <div>
-      <h2>Family Details Placeholder</h2>
+      <Collapse>
+        {membersInfo.map(member => {
+          console.log(member);
+          return (
+            <>
+              <Panel header={member.first_name + ' ' + member.last_name}>
+                <p>Relationship: {member.relationship}</p>
+                <p>Date of Birth: {member.DOB}</p>
+              </Panel>
+            </>
+          );
+        })}
+      </Collapse>
     </div>
   );
 };
