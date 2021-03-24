@@ -4,19 +4,16 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import MaterialTable from 'material-table';
 
-import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
-import FlagIcon from '@material-ui/icons/Flag';
 import { Paper } from '@material-ui/core';
 
 import './guest.css';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
 import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
+import GuestNotes from './GuestDetails/components/GuestNotes';
 import LoadingComponent from '../../common/LoadingComponent';
-import GuestMoreInfo from './GuestMoreInfo';
+import GuestMoreInfo from './GuestDetails/components/GuestMoreInfo';
 
 Modal.setAppElement('#root');
 

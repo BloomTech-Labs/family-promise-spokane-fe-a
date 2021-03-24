@@ -3,17 +3,21 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
-import { Button, Card } from 'antd';
+import GuestNotes from './components/GuestNotes';
+import GuestMoreInfo from './components/GuestMoreInfo';
+
+import { Button, Card, Typography } from 'antd';
+const { Title } = Typography;
 
 const GuestDetails = () => {
   const history = useHistory();
   const params = useParams();
-  //User Id
+  //User ID
   const { id } = params;
 
   const [memberInfo, setMemberInfo] = useState({});
   const [tabCard, setTabCard] = useState({
-    key: 'tab1',
+    key: 'tab4',
   });
 
   useEffect(() => {
@@ -54,13 +58,33 @@ const GuestDetails = () => {
   ];
 
   const contentList = {
-    tab1: <p>content1</p>,
-    tab2: <p>content2</p>,
+    tab1: (
+      <div className="tabContainer">
+        <GuestMoreInfo memberInfo={memberInfo} />
+      </div>
+    ),
+    tab2: (
+      <div className="tabContainer">
+        <p>Family Info</p>
+      </div>
+    ),
+    tab3: (
+      <div className="tabContainer">
+        <p>Flag Guest</p>
+      </div>
+    ),
+    tab4: (
+      <div className="tabContainer">
+        <GuestNotes memberInfo={memberInfo} />
+      </div>
+    ),
   };
+
+  console.log(memberInfo);
 
   return (
     <div>
-      <h1>Guest Detail Placeholder</h1>
+      <Title level={3}>Guest Detail Placeholder</Title>
       <Card
         style={{ width: '100%' }}
         title="Card title"
