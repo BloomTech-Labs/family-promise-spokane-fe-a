@@ -55,6 +55,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //logs user state of reservation status
   const [isReserved, setIsReserved] = useState(false);
   const [familyMemberIDs, setFamilyMemberIDs] = useState([]);
+  // eslint-disable-next-line
   const [localBedCount, setLocalBedCount] = useState(0);
 
   //************THIS COULD BE A FUNCTION BECAUSE IT IS BEING USED TWICE:******************
@@ -72,10 +73,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       setCount(count + 1);
       //taking member out if canceling
       let temp = membersStaying;
-      temp = temp.filter(item => {
-        if (item !== e.target.value) return item;
-        else return;
-      });
+      temp = temp.filter(item => item !== e.target.value);
       setMembersStaying(temp);
     }
   };
@@ -88,10 +86,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       console.log('waitlist', waitList);
     } else if (e.target.checked === false) {
       let temp = waitList;
-      temp = temp.filter(item => {
-        if (item !== e.target.value) return item;
-        else return;
-      });
+      temp = temp.filter(item => item !== e.target.value);
       setWaitList(temp);
     }
   };

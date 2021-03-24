@@ -11,13 +11,6 @@ import RenderFormData from './RenderFormData';
 
 import '../../../../../styles/IntakePacket/_validate-form-data.scss';
 
-// const mockSignerInfo = {
-//   email: 'mockemail@test.com',
-//   first_name: 'Test',
-//   last_name: 'Guest',
-//   id: '80ddfhweri8988jf',
-// };
-
 const ValidateFormData = ({
   navigation,
   tempFormStyle,
