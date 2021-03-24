@@ -50,7 +50,7 @@ export default function SupervisorCheckIn() {
 
         let temp = [];
         for (let i = 0; i < results.length; i++) {
-          results[i].members_staying.map(item => {
+          results[i].members_staying.forEach(item => {
             temp.push({
               name: item,
               family_id: results[i].family_id,
