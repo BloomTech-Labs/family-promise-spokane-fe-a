@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
 // Components
 import SupervisorGuestLogs from './SupervisorGuestLogs';
 import DevSupervisorAnalytics from './DevSupervisorAnalytics';
@@ -84,46 +83,26 @@ const useStyles = makeStyles({
   },
 });
 
-const columns = [
-  { title: 'name', field: 'first_name' },
-  { title: 'surname', field: 'last_name' },
-  { title: 'email', field: 'email' },
-  { title: '', field: 'clocked_in', type: 'boolean' },
-];
-const rows = [
-  { name: 'Snow', surname: 'Jon', age: 35 },
-  { name: 'Lannister', surname: 'Cersei', age: 42 },
-  { name: 'Lannister', surname: 'Jaime', age: 45 },
-  { name: 'Stark', surname: 'Arya', age: 16 },
-  { name: 'Targaryen', surname: 'Daenerys', age: null },
-  { name: 'Melisandre', surname: null, age: 150 },
-  { name: 'Clifford', surname: 'Ferrara', age: 44 },
-  { name: 'Frances', surname: 'Rossini', age: 36 },
-  { name: 'Roxie', surname: 'Harvey', age: 65 },
-];
-
 const Analytics = () => {
   const [logs, setLogs] = useState([]);
   const [card, setCard] = useState(false);
-  const [staffMembers, setStaffMembers] = useState([]);
   const [totalBedsReserved, setTotalBedsReserved] = useState(0);
-
   const [monthlyExit, setMonthlyExit] = useState({});
   const [monthlyIncome, setMonthlyIncome] = useState();
   const [monthlyStay, setMonthlyStay] = useState();
   const [guestsCheckedInCount, setGuestsCheckedInCount] = useState(0);
-
   const [rangeValue, setRangeValue] = useState(90);
-  const dispatch = useDispatch();
+
   const classes = useStyles();
-  const user = useSelector(state => state.CURRENT_USER);
-  const date = new Date();
-  const fullDate = date.toDateString();
+
+  const dispatch = useDispatch();
+
   const globalCount = useSelector(state => state.TOTAL_BEDS);
   const globalLogs = useSelector(state => state.RESERVATION_LOGS);
 
   useEffect(() => {
     dispatch(getDailyReservationLogs());
+    //eslint-ignore-next-line
   }, []);
 
   useEffect(() => {
