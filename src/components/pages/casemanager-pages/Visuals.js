@@ -2,21 +2,9 @@ import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import '../Guests/guest.css';
 
-// const initialState = {
-//   data: [],
-//   layout: {},
-//   frames: [],
-//   config: {
-//     displaylog: false,
-//     displayModeBar: false,
-//   },
-// };
-
 const Visuals = ({ days, current, family }) => {
   console.log('im days.layout', days.layout);
-  // const [enrolled, setEnrolled] = useState(days);
-  const [age, setAge] = useState(current);
-  const [members, setMembers] = useState(family);
+  //eslint-disable-next-line
   const [figure, setFigure] = useState(null);
 
   return (
@@ -34,20 +22,20 @@ const Visuals = ({ days, current, family }) => {
 
         <Plot
           className="DataViz"
-          data={age.data}
-          layout={age.layout}
-          frames={age.frames}
-          config={age.config}
+          data={current.data}
+          layout={current.layout}
+          frames={current.frames}
+          config={current.config}
           onInitialized={figure => setFigure(figure)}
           onUpdate={figure => setFigure(figure)}
         />
 
         <Plot
           className="DataViz"
-          data={members.data}
-          layout={members.layout}
-          frames={members.frames}
-          config={members.config}
+          data={family.data}
+          layout={family.layout}
+          frames={family.frames}
+          config={family.config}
           onInitialized={figure => setFigure(figure)}
           onUpdate={figure => setFigure(figure)}
         />
