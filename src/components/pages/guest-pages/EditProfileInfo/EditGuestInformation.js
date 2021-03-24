@@ -3,11 +3,16 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import EditFamMembers from './EditFamMembers';
 import { connect, useSelector } from 'react-redux';
 import actions from '../../../../state/actions/families';
-import styled from 'styled-components';
+import EditHouseHoldInfo from './EditHouseHoldInfo';
+import { Collapse } from 'antd';
 
-const EditGuestInformation = ({ fetchHousehold, fetchMembers }) => {
+const { Panel } = Collapse;
+
+const EditGuestInformation = ({ fetchHousehold }) => {
   const [familyInfo, setFamilyInfo] = useState({});
   const [membersInfo, setMembersInfo] = useState({});
+
+  console.log('houshold info', familyInfo);
 
   const user = useSelector(state => state.CURRENT_USER);
 
@@ -38,38 +43,44 @@ const EditGuestInformation = ({ fetchHousehold, fetchMembers }) => {
     fetchFamilyHousehold();
     // eslint-disable-next-line
   }, []);
-  console.log('state ', familyInfo);
 
   useEffect(() => {
     fetchMembersData();
-  }, [familyInfo, fetchMembersData]);
+    // eslint-disable-next-line
+  }, [familyInfo]);
 
-  const StyledEditForm = styled.div`
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-  `;
+  console.log('Parent component ', membersInfo);
+
+  // const getAllState = (memberState) => {
+  //   console.log([...memberState]);
+  // };
 
   return (
-    <StyledEditForm>
-      {Object.keys(membersInfo).map((member, key) => {
-        return (
-          <>
-            <h2>
-              {membersInfo[member].demographics.first_name}{' '}
-              {membersInfo[member].demographics.last_name}
-            </h2>
-            <EditFamMembers member={membersInfo[member]} key={key} />
-          </>
-        );
-      })}
-    </StyledEditForm>
+    <>
+      <h2>Family Member Information</h2>
+      <Collapse>
+        {Object.keys(membersInfo).map((member, key) => {
+          return (
+            <>
+              <Panel
+                header={`${membersInfo[member].demographics.first_name} ${membersInfo[member].demographics.last_name}`}
+                key={key}
+              >
+                <EditFamMembers member={membersInfo[member]} key={key} />
+              </Panel>
+            </>
+          );
+        })}
+      </Collapse>
+      <div>
+        <h2>Edit Household Information</h2>
+        <EditHouseHoldInfo familyInfo={familyInfo} />
+      </div>
+    </>
   );
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     household: state.HOUSEHOLD,
     loading: state.LOADING,

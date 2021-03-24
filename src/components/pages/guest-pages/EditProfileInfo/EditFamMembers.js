@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Radio, Button } from 'antd';
+import { Form, Input, Radio, Button } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 const RenderFamilyMembers = ({ member }) => {
-  const { demographics, barriers, schools } = member;
+  const { demographics, schools } = member;
 
-  console.log(member);
   const [editFormValues, setEditFormValues] = useState({
     income: demographics.income,
     employer: demographics.employer,
@@ -17,6 +16,24 @@ const RenderFamilyMembers = ({ member }) => {
     mckinney_school: schools.mckinney_school,
   });
 
+  const newData = {
+    ...member,
+    demographics: {
+      ...demographics,
+      income: JSON.parse(editFormValues.income),
+      employer: editFormValues.employer,
+    },
+    schools: {
+      ...schools,
+      highest_grade_completed: editFormValues.highest_grade_completed,
+      enrolled_status: editFormValues.enrolled_status,
+      attendance_status: editFormValues.attendance_status,
+      school_type: editFormValues.school_type,
+      school_name: editFormValues.school_name,
+      mckinney_school: editFormValues.mckinney_school,
+    },
+  };
+
   const handleChange = e => {
     setEditFormValues({
       ...editFormValues,
@@ -25,10 +42,9 @@ const RenderFamilyMembers = ({ member }) => {
   };
 
   const submitChanges = e => {
-    console.log('hit submit');
     e.preventDefault();
     axiosWithAuth()
-      .put(`/members/${member.id}`, editFormValues)
+      .put(`/members/${member.id}`, newData)
       .then(res => {
         console.log(res);
       })
@@ -72,8 +88,8 @@ const RenderFamilyMembers = ({ member }) => {
             value={editFormValues.enrolled_status}
             onChange={handleChange}
           >
-            <Radio value={true}>True</Radio>
-            <Radio value={false}>False</Radio>
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
           </Radio.Group>
         </Form.Item>
         {schools.enrolled_status && (
@@ -108,13 +124,13 @@ const RenderFamilyMembers = ({ member }) => {
                 value={editFormValues.mckinney_school}
                 onChange={handleChange}
               >
-                <Radio value={true}>True</Radio>
-                <Radio value={false}>False</Radio>
+                <Radio value={true}>Yes</Radio>
+                <Radio value={false}>No</Radio>
               </Radio.Group>
             </Form.Item>
           </>
         )}
-        <Button onClick={submitChanges}>Edit</Button>
+        <Button onClick={submitChanges}>Edit Member</Button>
       </Form>
     </div>
   );

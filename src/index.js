@@ -12,14 +12,13 @@ import PrivateRoute from './utils/auth/PrivateRoute';
 import 'dotenv';
 import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
-import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
-import FamilyProfile from './components/pages/FamilyProfile';
+import FamilyProfile from './components/pages/guest-pages/FamilyProfile';
 import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
@@ -33,7 +32,6 @@ import logger from 'redux-logger';
 import { Provider, useSelector } from 'react-redux';
 // import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
-import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
@@ -156,12 +154,6 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={FamilyProfile}
         />
-        <PrivateRoute
-          path="/EditInformation/:familyId"
-          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
-          component={EditGuestInformation}
-        />
-        <PrivateRoute path="/family" roles={['guest']} component={FamilyPage} />
         <SecureRoute
           path="/"
           exact
