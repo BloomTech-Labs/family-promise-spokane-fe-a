@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Guests from '../Guests/Guests';
 import SupervisorCheckIn from './SupervisorCheckIn';
 import SupervisorGuestLogs from './SupervisorGuestLogs';
+import DevSupervisorAnalytics from './DevSupervisorAnalytics';
 // UI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -344,45 +345,7 @@ const Analytics = () => {
           />
         </Container>
         {/* Used for development purposes, this will display all global logs from the redux store*/}
-        {/* <Container>
-          <Card className={classes.root} variant="outlined">
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textPrimary"
-                gutterBottom
-              >
-                Logs
-              </Typography>
-              <button
-                onClick={e => {
-                  fetchLogs(e);
-                }}
-              >
-                Fetch Logs
-              </button>
-              {card
-                ? logs.map(log => (
-                    <Card key={log.id}>
-                      <CardContent>
-                        <p> Checked in: {log.checked_in ? 'Yes' : 'No'}</p>
-                        <p>Date: {log.date}</p>
-                        <p>Family Id: {log.family_id}</p>
-                        <p> On-Site: {log.on_sight ? 'Yes' : 'No'}</p>
-                        <p>Supervisor Id: {log.supervisor_id}</p>
-                        <p> Time: {log.time}</p>
-                        <p>Beds Reserved: {log.beds_reserved}</p>
-                        <p>
-                          Reservation Status:{' '}
-                          {log.reservation_status ? 'Yes' : 'No'}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))
-                : ''}
-            </CardContent>
-          </Card>
-        </Container> */}
+        <DevSupervisorAnalytics fetchLogs={fetchLogs} card={card} logs={logs} />
       </Container>
     </>
   );
