@@ -144,38 +144,46 @@ const Guests = () => {
             actions={[
               {
                 icon: PeopleIcon,
-                tooltip: 'Family Members',
+                tooltip: 'Guest Details',
                 onClick: (event, rowData) => {
-                  // Do save operation
                   console.log(rowData);
-                  history.push(`/family/${rowData.family_id}`);
+                  history.push(`/guests/${rowData.id}`);
                 },
               },
-              {
-                icon: NoteIcon,
-                tooltip: 'Notes',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  setIsNotesOpen(true);
-                },
-              },
-              {
-                icon: FlagIcon,
-                tooltip: 'Flag Guest',
-                onClick: (event, rowData) => {
-                  setIsFlagOpen(true);
-                  setGuestId(rowData.id);
-                },
-              },
-              {
-                icon: InfoIcon,
-                tooltip: 'More Info',
-                onClick: (event, rowData) => {
-                  setResult(rowData);
-                  setIsOpen(!isOpen);
-                  // Do save operation
-                },
-              },
+              // {
+              //   icon: PeopleIcon,
+              //   tooltip: 'Family Members',
+              //   onClick: (event, rowData) => {
+              //     // Do save operation
+              //     console.log(rowData);
+              //     history.push(`/family/${rowData.family_id}`);
+              //   },
+              // },
+              // {
+              //   icon: NoteIcon,
+              //   tooltip: 'Notes',
+              //   onClick: (event, rowData) => {
+              //     // Do save operation
+              //     setIsNotesOpen(true);
+              //   },
+              // },
+              // {
+              //   icon: FlagIcon,
+              //   tooltip: 'Flag Guest',
+              //   onClick: (event, rowData) => {
+              //     setIsFlagOpen(true);
+              //     setGuestId(rowData.id);
+              //   },
+              // },
+              // {
+              //   icon: InfoIcon,
+              //   tooltip: 'More Info',
+              //   onClick: (event, rowData) => {
+              //     setResult(rowData);
+              //     setIsOpen(!isOpen);
+              //     // Do save operation
+              //   },
+              // },
             ]}
           />
         </div>
