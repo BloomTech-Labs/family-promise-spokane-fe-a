@@ -25,6 +25,7 @@ const FamilyMembers = () => {
 
   const fetchFamilyInfo = async () => {
     try {
+      // eslint-disable-next-line
       const info = await axiosWithAuth()
         .get(`/families/${params.id}`)
         .then(res => res.data);
@@ -50,13 +51,9 @@ const FamilyMembers = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchFamilyInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   console.log(familyInfo);
-  // }, [familyInfo]);
 
   if (loading) {
     return (

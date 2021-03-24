@@ -11,13 +11,6 @@ import RenderFormData from './RenderFormData';
 
 import '../../../../../styles/IntakePacket/_validate-form-data.scss';
 
-// const mockSignerInfo = {
-//   email: 'mockemail@test.com',
-//   first_name: 'Test',
-//   last_name: 'Guest',
-//   id: '80ddfhweri8988jf',
-// };
-
 const ValidateFormData = ({
   navigation,
   tempFormStyle,
@@ -59,7 +52,7 @@ const ValidateFormData = ({
       .post(`/families`, familyInfo)
       .then(res => {
         const familyId = res.data.families.id;
-        Object.keys(formData.familyMember).map(mem => {
+        Object.keys(formData.familyMember).forEach(mem => {
           familyMember[mem]['family_id'] = familyId;
           axiosWithAuth()
             .post('/members', familyMember[mem])
@@ -82,18 +75,18 @@ const ValidateFormData = ({
       });
   }
 
-  const redirectToDocusign = async () => {
-    try {
-      const res = await axios.post(
-        'http://localhost:8000/callDS',
-        envelopeArgs
-      );
-      setLoadDocusign(!loadDocuSign);
-      dispatch(getDocuSignUrl(res.data));
-    } catch (error) {
-      console.log('Error in load docusign', error);
-    }
-  };
+  // const redirectToDocusign = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       'http://localhost:8000/callDS',
+  //       envelopeArgs
+  //     );
+  //     setLoadDocusign(!loadDocuSign);
+  //     dispatch(getDocuSignUrl(res.data));
+  //   } catch (error) {
+  //     console.log('Error in load docusign', error);
+  //   }
+  // };
 
   const onChange = e => {
     setConfirmed(!confirmed);

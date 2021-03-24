@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-//import { useHistory } from 'react-router-dom';
+
 import { tableIcons } from '../../../utils/tableIcons';
 
-// import { CopyrightOutlined } from '@material-ui/icons';
 import Modal from 'react-modal';
 import '../Guests/guest.css';
-// import { CardContent, Card } from '@material-ui/core';
+
 import { Checkbox } from '@material-ui/core';
 
 import Visuals from './Visuals';
@@ -16,9 +15,6 @@ Modal.setAppElement('#root');
 
 const CaseAnalytics = () => {
   const [guestId, setGuestId] = useState(null);
-  // const [result, setResult] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
   const [enrolled, setEnrolled] = useState({});
   const [age, setAge] = useState({});
   const [members, setMembers] = useState({});
@@ -32,10 +28,6 @@ const CaseAnalytics = () => {
     ],
     data: [],
   });
-  // function toggleModal(e) {
-  //   e.preventDefault();
-  //   setIsOpen(!isOpen);
-  // }
 
   useEffect(() => {
     axiosWithAuth()
@@ -61,6 +53,7 @@ const CaseAnalytics = () => {
       .catch(err => {
         alert('error in fetch for members');
       });
+    //eslint-disable-next-line
   }, []);
 
   const runVisualization = guestId => {
@@ -94,9 +87,9 @@ const CaseAnalytics = () => {
               exportButton: true,
               rowStyle: rowData => ({
                 backgroundColor:
-                  rowData.flag_level == 2
+                  rowData.flag_level === 2
                     ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
+                    : rowData.flag_level === 3
                     ? 'rgba(255, 0, 0, 0.418)'
                     : 'white',
               }),
@@ -113,7 +106,6 @@ const CaseAnalytics = () => {
                   setGuestId(state.data[rowsData.id - 1].id);
                 },
               },
-              //console.log(guestId)
             ]}
           />
           <div>

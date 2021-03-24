@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+//UI
 import { Layout, Menu } from 'antd';
 import {
   PlusOutlined,
@@ -6,11 +9,9 @@ import {
   InfoCircleOutlined,
   HomeOutlined,
 } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
-import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
-import { useSelector } from 'react-redux';
+// import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 
 const { Sider } = Layout;
 
@@ -22,14 +23,6 @@ const SideBar = () => {
     setCollapsed(!collapsed);
   };
 
-  // const redirectToUserProfile = () => {
-  //   history.push('/me');
-  // };
-
-  const redirectToAnalytics = () => {
-    history.push('/analytics');
-  };
-
   const redirectToIntake = () => {
     history.push('/intake');
   };
@@ -37,10 +30,6 @@ const SideBar = () => {
   const redirectToGuests = () => {
     history.push('/guests');
   };
-
-  // const redirectToFamily = () => {
-  //   history.push('/family');
-  // };
 
   const redirectToCaseManagerAnalytics = () => {
     history.push('/caseAnalytics');
@@ -58,6 +47,18 @@ const SideBar = () => {
     history.push('/guest-dashboard');
   };
 
+  // Turned off B/C features have been temporarily disabled
+  // const redirectToFamily = () => {
+  //   history.push('/family');
+  // };
+
+  // const redirectToAnalytics = () => {
+  //   history.push('/analytics');
+  // };
+
+  // const redirectToUserProfile = () => {
+  //   history.push('/me');
+  // };
   return (
     <>
       {user.role && (
