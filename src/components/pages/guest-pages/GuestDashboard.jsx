@@ -118,6 +118,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     fetchFamilyInformation()
       .then(res => console.log(res))
       .catch(err => console.log('ERROR IN GLOBAL COUNT USE EFFECT', err));
+    //eslint-disable-next-line
   }, []);
 
   //Reserve button - Will post to the logs endpoint with the membersStaying , will set isReserved to true, will return the reservation ID for put requeset, Confirm that the user has made a reservation.
