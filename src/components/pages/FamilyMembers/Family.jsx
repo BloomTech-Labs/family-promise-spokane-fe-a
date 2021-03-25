@@ -15,7 +15,7 @@ const FamilyMembers = () => {
   //const [familyInfo, setFamilyInfo] = useState({});
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'relationship', field: 'relationship' },
@@ -25,6 +25,7 @@ const FamilyMembers = () => {
 
   const fetchFamilyInfo = async () => {
     try {
+      // eslint-disable-next-line
       const info = await axiosWithAuth()
         .get(`/families/${params.id}`)
         .then(res => res.data);
@@ -42,6 +43,7 @@ const FamilyMembers = () => {
 
       setState(copy);
     } catch (error) {
+      console.log('error family.jsx 45', error);
       alert(error);
     } finally {
       setLoading(false);
@@ -49,13 +51,9 @@ const FamilyMembers = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchFamilyInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   console.log(familyInfo);
-  // }, [familyInfo]);
 
   if (loading) {
     return (

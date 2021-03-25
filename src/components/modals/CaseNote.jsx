@@ -13,11 +13,7 @@ const CaseNote = ({ note, setNotes, setCurrentNote, toggleModal }) => {
   const handleDelete = async () => {
     try {
       await axiosWithAuth().delete(`/notes/${note.id}`);
-      setNotes(prevState =>
-        prevState.filter(el => {
-          if (!(el.id === note.id)) return el;
-        })
-      );
+      setNotes(prevState => prevState.filter(el => el.id === note.id));
       toggleModal();
     } catch (error) {
       alert('error');

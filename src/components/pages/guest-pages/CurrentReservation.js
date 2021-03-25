@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
-import { Checkbox, Button } from '@material-ui/core';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Button } from '@material-ui/core';
+
 import '../../../styles/app.scss';
 
 const CurrentReservation = ({ membersStaying, cancelButton, beds }) => {

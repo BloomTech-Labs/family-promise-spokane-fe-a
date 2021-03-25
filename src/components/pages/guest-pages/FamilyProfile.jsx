@@ -5,7 +5,7 @@ This component contains:
   -**does NOT include info for individual member
 */
 import React, { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Members from './Members';
 import EditGuestInformation from './EditProfileInfo/EditGuestInformation';
 
@@ -44,7 +44,6 @@ const tabListNoTitle = [
 
 const FamilyProfile = ({ familyInfo, fetchFamily }) => {
   const params = useParams();
-  const { push } = useHistory();
   const familyId = params.familyId;
   const [isModalVisible, setIsModalVisible] = useState(false);
 

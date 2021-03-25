@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Guests from '../Guests/Guests';
-import SupervisorCheckIn from './SupervisorCheckIn';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+// Components
 import SupervisorGuestLogs from './SupervisorGuestLogs';
+import DevSupervisorAnalytics from './DevSupervisorAnalytics';
 // UI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import MaterialTable from 'material-table';
-import Circle from 'react-circle';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import axios from 'axios';
-// utils
-import { tableIcons } from '../../../utils/tableIcons';
-import { findLastIndex } from 'underscore';
+// Utils
 import { getDailyReservationLogs } from '../../../state/actions/index';
-import { red } from 'kleur';
 
 const useStyles = makeStyles({
   bigContainer: {
@@ -91,47 +83,27 @@ const useStyles = makeStyles({
   },
 });
 
-const columns = [
-  { title: 'name', field: 'first_name' },
-  { title: 'surname', field: 'last_name' },
-  { title: 'email', field: 'email' },
-  { title: '', field: 'clocked_in', type: 'boolean' },
-];
-const rows = [
-  { name: 'Snow', surname: 'Jon', age: 35 },
-  { name: 'Lannister', surname: 'Cersei', age: 42 },
-  { name: 'Lannister', surname: 'Jaime', age: 45 },
-  { name: 'Stark', surname: 'Arya', age: 16 },
-  { name: 'Targaryen', surname: 'Daenerys', age: null },
-  { name: 'Melisandre', surname: null, age: 150 },
-  { name: 'Clifford', surname: 'Ferrara', age: 44 },
-  { name: 'Frances', surname: 'Rossini', age: 36 },
-  { name: 'Roxie', surname: 'Harvey', age: 65 },
-];
-
 const Analytics = () => {
   const [logs, setLogs] = useState([]);
   const [card, setCard] = useState(false);
-  const [staffMembers, setStaffMembers] = useState([]);
   const [totalBedsReserved, setTotalBedsReserved] = useState(0);
-
   const [monthlyExit, setMonthlyExit] = useState({});
   const [monthlyIncome, setMonthlyIncome] = useState();
   const [monthlyStay, setMonthlyStay] = useState();
   const [guestsCheckedInCount, setGuestsCheckedInCount] = useState(0);
-
   const [rangeValue, setRangeValue] = useState(90);
-  const dispatch = useDispatch();
+
   const classes = useStyles();
-  const user = useSelector(state => state.CURRENT_USER);
-  const date = new Date();
-  const fullDate = date.toDateString();
+
+  const dispatch = useDispatch();
+
   const globalCount = useSelector(state => state.TOTAL_BEDS);
   const globalLogs = useSelector(state => state.RESERVATION_LOGS);
 
   useEffect(() => {
     dispatch(getDailyReservationLogs());
-  }, []);
+    //eslint-ignore-next-line
+  }, [dispatch]);
 
   useEffect(() => {
     let filteredLogs = [];
@@ -344,45 +316,7 @@ const Analytics = () => {
           />
         </Container>
         {/* Used for development purposes, this will display all global logs from the redux store*/}
-        {/* <Container>
-          <Card className={classes.root} variant="outlined">
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textPrimary"
-                gutterBottom
-              >
-                Logs
-              </Typography>
-              <button
-                onClick={e => {
-                  fetchLogs(e);
-                }}
-              >
-                Fetch Logs
-              </button>
-              {card
-                ? logs.map(log => (
-                    <Card key={log.id}>
-                      <CardContent>
-                        <p> Checked in: {log.checked_in ? 'Yes' : 'No'}</p>
-                        <p>Date: {log.date}</p>
-                        <p>Family Id: {log.family_id}</p>
-                        <p> On-Site: {log.on_sight ? 'Yes' : 'No'}</p>
-                        <p>Supervisor Id: {log.supervisor_id}</p>
-                        <p> Time: {log.time}</p>
-                        <p>Beds Reserved: {log.beds_reserved}</p>
-                        <p>
-                          Reservation Status:{' '}
-                          {log.reservation_status ? 'Yes' : 'No'}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))
-                : ''}
-            </CardContent>
-          </Card>
-        </Container> */}
+        <DevSupervisorAnalytics fetchLogs={fetchLogs} card={card} logs={logs} />
       </Container>
     </>
   );

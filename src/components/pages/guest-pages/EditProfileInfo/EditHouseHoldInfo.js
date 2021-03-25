@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Radio } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
@@ -32,23 +33,7 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
       vehicle_color: vehicle?.color,
       vehicle_plate: vehicle?.license_plate,
     });
-  }, [
-    emergencyContact.name,
-    emergencyContact.number,
-    familyInfo,
-    gov_benefits.foodstamps,
-    insurance.has_insurance,
-    insurance.health_insurance_type,
-    insurance.members_covered,
-    insurance.pregnancies,
-    phone_one.number,
-    phone_two.number,
-    vehicle.color,
-    vehicle.license_plate,
-    vehicle.make,
-    vehicle.model,
-    vehicle.year,
-  ]);
+  }, [familyInfo]);
 
   const newData = {
     ...familyInfo,
