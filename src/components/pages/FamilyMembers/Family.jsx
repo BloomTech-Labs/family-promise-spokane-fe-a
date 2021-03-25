@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import LoadingComponent from '../../common/LoadingComponent';
-import MaterialTable, { MTableToolbar } from 'material-table';
-import { useHistory } from 'react-router-dom';
-import { tableIcons } from '../../../utils/tableIcons';
-import { Button } from '@material-ui/core';
 
-const FamilyMembers = ({ familyId }) => {
+import MaterialTable, { MTableToolbar } from 'material-table';
+import { Button } from '@material-ui/core';
+import { tableIcons } from '../../../utils/tableIcons';
+
+const FamilyMembers = () => {
   const history = useHistory();
+  const params = useParams();
+
+  const familyId = params.id;
+
   const [loading, setLoading] = useState(true);
   // State below is unused
   //const [familyInfo, setFamilyInfo] = useState({});
