@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import MaterialTable from 'material-table';
 
-import NoteIcon from '@material-ui/icons/Note';
-import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
-import FlagIcon from '@material-ui/icons/Flag';
-import { Paper } from '@material-ui/core';
-
-import './guest.css';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
-import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
-import LoadingComponent from '../../common/LoadingComponent';
-import GuestMoreInfo from './GuestMoreInfo';
 
-Modal.setAppElement('#root');
+import LoadingComponent from '../../common/LoadingComponent';
+import MaterialTable from 'material-table';
+import PeopleIcon from '@material-ui/icons/People';
+import { Paper } from '@material-ui/core';
+
+import styled from 'styled-components';
+import './guest.css';
 
 const TitleStyled = styled.div`
   h1 {
@@ -28,12 +20,7 @@ const TitleStyled = styled.div`
 `;
 
 const Guests = () => {
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name' },
@@ -65,19 +52,22 @@ const Guests = () => {
             ...member,
           };
         });
-        copy.data.push(...formattedData);
+        copy.data = formattedData;
         console.log(copy);
 
         setState(copy);
       })
       .catch(err => {
         alert('error');
+        console.error(err);
       })
       .finally(() => {
         if (loading) {
           setLoading(false);
         }
       });
+
+    console.log(state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,35 +79,10 @@ const Guests = () => {
     );
   }
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-    setResult(null);
-  };
-
-  //TODO will have to set result to empty when done with modal
-
   return (
     <TitleStyled>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {result ? <GuestMoreInfo familyInfo={result} /> : ''}
-      </Modal>
       <h1>Guests</h1>
       <div className="guest-table-container">
-        {isNotesOpen && <GuestNotes setIsNotesOpen={setIsNotesOpen} />}
-        {isFlagOpen && (
-          <FlagGuest
-            setIsFlagOpen={setIsFlagOpen}
-            setState={setState}
-            guestId={guestId}
-          />
-        )}
         <div className="guest-table">
           <MaterialTable
             components={{
@@ -142,36 +107,10 @@ const Guests = () => {
             actions={[
               {
                 icon: PeopleIcon,
-                tooltip: 'Family Members',
+                tooltip: 'Guest Details',
                 onClick: (event, rowData) => {
-                  // Do save operation
                   console.log(rowData);
-                  history.push(`/family/${rowData.family_id}`);
-                },
-              },
-              {
-                icon: NoteIcon,
-                tooltip: 'Notes',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  setIsNotesOpen(true);
-                },
-              },
-              {
-                icon: FlagIcon,
-                tooltip: 'Flag Guest',
-                onClick: (event, rowData) => {
-                  setIsFlagOpen(true);
-                  setGuestId(rowData.id);
-                },
-              },
-              {
-                icon: InfoIcon,
-                tooltip: 'More Info',
-                onClick: (event, rowData) => {
-                  setResult(rowData);
-                  setIsOpen(!isOpen);
-                  // Do save operation
+                  history.push(`/guests/${rowData.id}`);
                 },
               },
             ]}

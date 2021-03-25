@@ -34,7 +34,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   useEffect(() => {
     dispatch(getLatestLog());
-  }, [dispatch]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (log.date === fullDate && log.reservation_status === true) {
@@ -202,7 +203,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
     membersStaying.length = 0;
 
-    setCount(count); //This might be causing a weird bug?????
+    // setCount(count); //This might be causing a weird bug?????
 
     axiosWithAuth()
       .put(`/logs/${resID}`, {
@@ -282,7 +283,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       setSeconds(sec);
     }, 1000);
     return () => clearInterval(interval);
-  }, [sec]);
+    //eslint-disable-next-line
+  }, []);
 
   //-----------------------------------------------------------------
   // --------------------------START OF RENDER-----------------------

@@ -17,12 +17,15 @@ const GuestAnalytics = ({
   family,
 }) => {
   const user = useSelector(state => state.CURRENT_USER);
+  // const family = useSelector(state => state.FAMILY);
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
+  console.log('GA 22', user);
 
   const fetchFamilyHousehold = async () => {
     try {
       const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+      console.log(res);
 
       const family = res.data.family;
 
