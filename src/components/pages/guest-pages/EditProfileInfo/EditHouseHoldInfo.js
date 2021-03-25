@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, Radio } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
-const EditHouseHoldInfo = ({ familyInfo }) => {
+const EditHouseHoldInfo = ({ familyInfo, setCloseModal }) => {
   const {
     phone_one,
     phone_two,
@@ -14,6 +15,7 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
   console.log(familyInfo);
 
   const [familyInfoForm, setFamilyInfoForm] = useState({});
+  const [madeChanges, setMadeChanges] = useState(false);
 
   useEffect(() => {
     setFamilyInfoForm({
@@ -32,23 +34,7 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
       vehicle_color: vehicle?.color,
       vehicle_plate: vehicle?.license_plate,
     });
-  }, [
-    emergencyContact.name,
-    emergencyContact.number,
-    familyInfo,
-    gov_benefits.foodstamps,
-    insurance.has_insurance,
-    insurance.health_insurance_type,
-    insurance.members_covered,
-    insurance.pregnancies,
-    phone_one.number,
-    phone_two.number,
-    vehicle.color,
-    vehicle.license_plate,
-    vehicle.make,
-    vehicle.model,
-    vehicle.year,
-  ]);
+  }, [familyInfo]);
 
   const newData = {
     ...familyInfo,
@@ -93,7 +79,10 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
       ...familyInfoForm,
       [e.target.name]: e.target.value,
     });
+    setMadeChanges(true);
   };
+
+  setCloseModal(madeChanges);
 
   const submitChanges = e => {
     e.preventDefault();
@@ -105,6 +94,7 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
       .catch(err => {
         console.log(err);
       });
+    setMadeChanges(false);
   };
 
   return (
@@ -237,7 +227,9 @@ const EditHouseHoldInfo = ({ familyInfo }) => {
             onChange={handleChange}
           />
         </Form.Item>
-        <Button onClick={submitChanges}>Submit</Button>
+        <Button disabled={!madeChanges} type="primary" onClick={submitChanges}>
+          Save Changes
+        </Button>
       </Form>
     </div>
   );

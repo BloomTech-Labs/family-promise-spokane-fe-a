@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 const NavBar = () => {
   const family = useSelector(state => state.FAMILY);
-  console.log(family);
 
   const history = useHistory();
   const { authState, authService } = useOktaAuth();

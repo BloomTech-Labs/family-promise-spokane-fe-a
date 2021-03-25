@@ -8,7 +8,7 @@ import { Collapse } from 'antd';
 
 const { Panel } = Collapse;
 
-const EditGuestInformation = ({ fetchHousehold }) => {
+const EditGuestInformation = ({ fetchHousehold, setCloseModal }) => {
   const [familyInfo, setFamilyInfo] = useState({});
   const [membersInfo, setMembersInfo] = useState({});
 
@@ -61,20 +61,26 @@ const EditGuestInformation = ({ fetchHousehold }) => {
       <Collapse>
         {Object.keys(membersInfo).map((member, key) => {
           return (
-            <>
-              <Panel
-                header={`${membersInfo[member].demographics.first_name} ${membersInfo[member].demographics.last_name}`}
+            <Panel
+              header={`${membersInfo[member].demographics.first_name} ${membersInfo[member].demographics.last_name}`}
+              key={key}
+            >
+              <EditFamMembers
+                member={membersInfo[member]}
                 key={key}
-              >
-                <EditFamMembers member={membersInfo[member]} key={key} />
-              </Panel>
-            </>
+                setCloseModal={setCloseModal}
+              />
+            </Panel>
           );
         })}
       </Collapse>
       <div>
+        <br></br>
         <h2>Edit Household Information</h2>
-        <EditHouseHoldInfo familyInfo={familyInfo} />
+        <EditHouseHoldInfo
+          familyInfo={familyInfo}
+          setCloseModal={setCloseModal}
+        />
       </div>
     </>
   );

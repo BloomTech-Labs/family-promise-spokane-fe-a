@@ -51,17 +51,11 @@ const GuestAnalytics = ({
     // counts all missing fields using underscore countby library to cound a modified key value
     // example modified values changes list_indefinite_conditions to "List indefinite conditions"
     // countBy method return an object of keys and their count
-    const countMissing = _.countBy(missingFields, function(field) {
+    const countMissing = _.countBy(missingFields, function (field) {
       let modified = field;
       return (
-        field
-          .toString()
-          .charAt(0)
-          .toUpperCase() +
-        modified
-          .slice(1)
-          .split('_')
-          .join(' ')
+        field.toString().charAt(0).toUpperCase() +
+        modified.slice(1).split('_').join(' ')
       );
     });
     let modifiedStringValues = [];
