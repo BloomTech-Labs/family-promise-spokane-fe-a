@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /*
 Displays information for a family.
 This component contains:
@@ -10,7 +11,7 @@ import Members from './Members';
 import EditGuestInformation from './EditProfileInfo/EditGuestInformation';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Avatar, Descriptions, Card, Button, Modal } from 'antd';
+import { Avatar, Descriptions, Card, Button, Modal, notification } from 'antd';
 
 //redux
 import { connect } from 'react-redux';
@@ -46,6 +47,7 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
   const params = useParams();
   const familyId = params.familyId;
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [closeModal, setCloseModal] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -55,8 +57,34 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
     setIsModalVisible(false);
   };
 
+  const openNotification = () => {
+    const key = `open${Date.now()}`;
+    const btn = (
+      <Button
+        type="primary"
+        size="small"
+        onClick={() => notification.close(key)}
+      >
+        Confirm
+      </Button>
+    );
+    notification.open({
+      message: 'You have unsaved changes',
+      description: 'If you close this window now, your changes will be lost.',
+      key,
+      btn,
+      // eslint-disable-next-line
+      onClose: close,
+    });
+  };
+
   const handleCancel = () => {
-    setIsModalVisible(false);
+    if (closeModal) {
+      openNotification();
+      setCloseModal(false);
+    } else {
+      setIsModalVisible(false);
+    }
   };
 
   useEffect(() => {
@@ -253,7 +281,7 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
           onCancel={handleCancel}
           footer={null}
         >
-          <EditGuestInformation />
+          <EditGuestInformation setCloseModal={setCloseModal} />
         </Modal>
       </div>
 

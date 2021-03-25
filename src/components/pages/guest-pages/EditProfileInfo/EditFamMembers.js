@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Form, Input, Radio, Button } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
-const RenderFamilyMembers = ({ member }) => {
+const RenderFamilyMembers = ({ member, setCloseModal }) => {
   const { demographics, schools } = member;
+  const [madeChanges, setMadeChanges] = useState(false);
 
   const [editFormValues, setEditFormValues] = useState({
     income: demographics.income,
@@ -39,7 +40,10 @@ const RenderFamilyMembers = ({ member }) => {
       ...editFormValues,
       [e.target.name]: e.target.value,
     });
+    setMadeChanges(true);
   };
+
+  setCloseModal(madeChanges);
 
   const submitChanges = e => {
     e.preventDefault();
@@ -51,13 +55,14 @@ const RenderFamilyMembers = ({ member }) => {
       .catch(err => {
         console.log(err);
       });
+    setMadeChanges(false);
   };
 
   return (
     <div>
-      <Form onSubmitCapture={submitChanges} layout={'verticle'}>
+      <Form onSubmitCapture={submitChanges} layout={'vertical'}>
         <h3>Work</h3>
-        <Form.Item label="Monthly Income">
+        <Form.Item label="Monthly Income:">
           <Input
             name="income"
             type="text"
@@ -130,7 +135,9 @@ const RenderFamilyMembers = ({ member }) => {
             </Form.Item>
           </>
         )}
-        <Button onClick={submitChanges}>Edit Member</Button>
+        <Button type="primary" disabled={!madeChanges} onClick={submitChanges}>
+          Save Changes
+        </Button>
       </Form>
     </div>
   );
