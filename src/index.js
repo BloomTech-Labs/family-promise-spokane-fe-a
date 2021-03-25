@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -7,14 +6,20 @@ import {
   useHistory,
   Switch,
 } from 'react-router-dom';
+import { rootReducer } from './state/reducers/index';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { Provider, useSelector } from 'react-redux';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+import { LastLocationProvider } from 'react-router-last-location';
+
+import { config } from './utils/oktaConfig';
 import PrivateRoute from './utils/auth/PrivateRoute';
-import 'dotenv';
-import 'antd/dist/antd.less';
+
 import { NotFoundPage } from './components/pages/NotFound';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
-import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
@@ -24,29 +29,25 @@ import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
 import SupervisorCheckIn from './components/pages/supervisor-pages/SupervisorCheckIn';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
-import './styles/app.scss';
-import { rootReducer } from './state/reducers/index';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import { Provider, useSelector } from 'react-redux';
-// import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
 import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
-import { LastLocationProvider } from 'react-router-last-location';
+import GuestDetails from './components/pages/Guests/GuestDetails/GuestDetails';
+
+import 'dotenv';
+import './styles/app.scss';
+import 'antd/dist/antd.less';
+
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <LastLocationProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <App />
       </LastLocationProvider>
     </Router>
   </Provider>,
@@ -133,11 +134,16 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={IntakePacket}
         />
-
         <Route
+          exact
           path="/guests"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={Guests}
+        />
+        <Route
+          path="/guests/:id"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={GuestDetails}
         />
         <PrivateRoute
           path="/supervisor-checkin"

@@ -8,7 +8,7 @@ import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Checkbox, Card, Progress, Button } from 'antd';
+import { Form, Input, Checkbox, Card, Progress } from 'antd';
 
 const Pets = ({
   navigation,

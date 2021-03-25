@@ -156,9 +156,9 @@ const IntakePacket = () => {
     step,
   };
 
-  // if (!userId) {
-  //   return <CreateOktaAccountForm setUserId={setUserId} />;
-  // }
+  if (!userId) {
+    return <CreateOktaAccountForm setUserId={setUserId} />;
+  }
   formData.familyInfo.user_id = userId;
 
   //Returns component based on useStep hook step.

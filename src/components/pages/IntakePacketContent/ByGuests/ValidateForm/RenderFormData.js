@@ -144,7 +144,6 @@ const RenderFormData = ({ formData, signerInfo }) => {
 
       {familyMember ? (
         <>
-          <h2>Family Information:</h2>
           {Object.keys(familyMember).map((member, key) => (
             <Collapse>
               <Panel
