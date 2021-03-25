@@ -55,8 +55,8 @@ const RenderFamilyMembers = ({ member }) => {
 
   return (
     <div>
-      <Form onSubmitCapture={submitChanges}>
-        <h2>Work</h2>
+      <Form onSubmitCapture={submitChanges} layout={'verticle'}>
+        <h3>Work</h3>
         <Form.Item label="Monthly Income">
           <Input
             name="income"
@@ -73,7 +73,7 @@ const RenderFamilyMembers = ({ member }) => {
             onChange={handleChange}
           />
         </Form.Item>
-        <h2>School</h2>
+        <h3>School</h3>
         <Form.Item label="Highest Completed Grade:">
           <Input
             name="highest_grade_completed"

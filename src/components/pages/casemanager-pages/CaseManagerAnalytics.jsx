@@ -32,10 +32,6 @@ const CaseAnalytics = () => {
     ],
     data: [],
   });
-  // function toggleModal(e) {
-  //   e.preventDefault();
-  //   setIsOpen(!isOpen);
-  // }
 
   useEffect(() => {
     axiosWithAuth()
@@ -61,7 +57,7 @@ const CaseAnalytics = () => {
       .catch(err => {
         alert('error in fetch for members');
       });
-  }, []);
+  }, [state]);
 
   const runVisualization = guestId => {
     console.log(guestId);
