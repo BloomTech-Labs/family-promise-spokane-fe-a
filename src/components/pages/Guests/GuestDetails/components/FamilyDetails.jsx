@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { axiosWithAuth } from '../../../../../api/axiosWithAuth';
 
-import { Collapse, Typography } from 'antd';
-
-const { Title } = Typography;
+import { Collapse } from 'antd';
 const { Panel } = Collapse;
 
 const FamilyDetails = ({ familyId }) => {
@@ -26,6 +24,7 @@ const FamilyDetails = ({ familyId }) => {
 
   useEffect(() => {
     fetchMembersInfo(familyId);
+    //eslint-disable-next-line
   }, []);
 
   return (

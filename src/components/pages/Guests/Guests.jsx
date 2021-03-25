@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
-import MaterialTable from 'material-table';
 
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+import { tableIcons } from '../../../utils/tableIcons';
+
+import LoadingComponent from '../../common/LoadingComponent';
+import MaterialTable from 'material-table';
 import PeopleIcon from '@material-ui/icons/People';
 import { Paper } from '@material-ui/core';
 
+import styled from 'styled-components';
 import './guest.css';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { tableIcons } from '../../../utils/tableIcons';
-import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from './GuestDetails/components/GuestNotes';
-import LoadingComponent from '../../common/LoadingComponent';
-import GuestMoreInfo from './GuestDetails/components/GuestMoreInfo';
-
-Modal.setAppElement('#root');
 
 const TitleStyled = styled.div`
   h1 {
@@ -25,12 +20,7 @@ const TitleStyled = styled.div`
 `;
 
 const Guests = () => {
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name' },
@@ -69,6 +59,7 @@ const Guests = () => {
       })
       .catch(err => {
         alert('error');
+        console.error(err);
       })
       .finally(() => {
         if (loading) {
@@ -88,35 +79,10 @@ const Guests = () => {
     );
   }
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-    setResult(null);
-  };
-
-  //TODO will have to set result to empty when done with modal
-
   return (
     <TitleStyled>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {result ? <GuestMoreInfo familyInfo={result} /> : ''}
-      </Modal>
       <h1>Guests</h1>
       <div className="guest-table-container">
-        {isNotesOpen && <GuestNotes setIsNotesOpen={setIsNotesOpen} />}
-        {isFlagOpen && (
-          <FlagGuest
-            setIsFlagOpen={setIsFlagOpen}
-            setState={setState}
-            guestId={guestId}
-          />
-        )}
         <div className="guest-table">
           <MaterialTable
             components={{
