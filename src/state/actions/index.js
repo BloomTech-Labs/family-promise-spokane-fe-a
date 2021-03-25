@@ -26,7 +26,7 @@ export const setCurrentUser = () => async dispatch => {
 export const getFamily = () => async dispatch => {
   dispatch({ type: 'GET_FAMILY_FETCHING' });
   const currentUser = await axiosWithAuth().get('/users/me');
-  if (currentUser.data.user.role !== 'supervisor') {
+  if (currentUser.data.user.role === 'guest') {
     try {
       let myFamily = await axiosWithAuth().get(
         `families/user/${currentUser.data.user.id}`
@@ -42,7 +42,7 @@ export const getFamily = () => async dispatch => {
 export const getHousehold = () => async dispatch => {
   dispatch({ type: 'GET_HOUSEHOLD_FETCHING' });
   const currentUser = await axiosWithAuth().get('/users/me');
-  if (currentUser.data.user.role !== 'supervisor') {
+  if (currentUser.data.user.role === 'guest') {
     try {
       let myFamily = await axiosWithAuth().get(
         `families/user/${currentUser.data.user.id}`
@@ -61,7 +61,7 @@ export const getHousehold = () => async dispatch => {
 export const getMembers = () => async dispatch => {
   dispatch({ type: 'GET_MEMBERS_FETCHING' });
   const currentUser = await axiosWithAuth().get('/users/me');
-  if (currentUser.data.user.role !== 'supervisor') {
+  if (currentUser.data.user.role === 'guest') {
     try {
       let myFamily = await axiosWithAuth().get(
         `families/user/${currentUser.data.user.id}`
@@ -103,7 +103,7 @@ export const updateBedCount = count => async dispatch => {
 export const getLatestLog = () => async dispatch => {
   dispatch({ type: 'LATEST_LOG_FETCHING' });
   const currentUser = await axiosWithAuth().get('/users/me');
-  if (currentUser.data.user.role !== 'supervisor') {
+  if (currentUser.data.user.role === 'guest') {
     try {
       let myFamily = await axiosWithAuth().get(
         `families/user/${currentUser.data.user.id}`
