@@ -28,8 +28,6 @@ export const getFamily = () => async dispatch => {
   const currentUser = await axiosWithAuth().get('/users/me');
   if (currentUser.data.user.role !== 'supervisor') {
     try {
-      console.log('actions 31', currentUser);
-      console.log('current user actions 32', currentUser.data.user);
       let myFamily = await axiosWithAuth().get(
         `families/user/${currentUser.data.user.id}`
       );
