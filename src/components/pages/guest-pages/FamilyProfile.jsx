@@ -6,15 +6,16 @@ This component contains:
 */
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Members from '../pages/guest-pages/Members';
+import Members from './Members';
+import EditGuestInformation from './EditProfileInfo/EditGuestInformation';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Avatar, Descriptions, Card } from 'antd';
+import { Avatar, Descriptions, Card, Button, Modal } from 'antd';
 
 //redux
 import { connect } from 'react-redux';
-import actions from '../../state/actions/families';
-import GuestAnalytics from './guest-pages/GuestAnalytics';
+import actions from '../../../state/actions/families';
+import GuestAnalytics from './GuestAnalytics';
 
 //For tabs component from Ant Design
 //The key refrences the keys in the contentListNoTitle varible below
@@ -45,6 +46,19 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
   const params = useParams();
   const { push } = useHistory();
   const familyId = params.familyId;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     fetchFamily(familyId);
@@ -225,10 +239,6 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
     };
   }
 
-  const editInfo = e => {
-    push('/EditInformation/:familyId');
-  };
-
   return (
     <div className="user-container">
       <div className="profile-header-container">
@@ -236,8 +246,18 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
           size={{ xs: 100, sm: 150, md: 200, lg: 200, xl: 200, xxl: 200 }}
           src={familyInfo?.avatar_url}
         />
+        <Button onClick={showModal}>Edit Family Info</Button>
+        <Modal
+          title="Edit Family Info"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <EditGuestInformation />
+        </Modal>
       </div>
-      <button onClick={editInfo}>Edit Family Information</button>
+
       <Card
         style={{ width: '100%' }}
         tabList={tabListNoTitle}
@@ -248,7 +268,6 @@ const FamilyProfile = ({ familyInfo, fetchFamily }) => {
       >
         {contentListNoTitle[tab.noTitleKey]}
       </Card>
-      {/* <button onClick={push('/EditInformation/:familyId')}>Edit Family Information</button> */}
     </div>
   );
 };
