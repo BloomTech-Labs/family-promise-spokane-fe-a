@@ -17,12 +17,15 @@ const GuestAnalytics = ({
   family,
 }) => {
   const user = useSelector(state => state.CURRENT_USER);
+  // const family = useSelector(state => state.FAMILY);
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
+  console.log('GA 22', user);
 
   const fetchFamilyHousehold = async () => {
     try {
       const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+      console.log(res);
 
       const family = res.data.family;
 
@@ -48,11 +51,17 @@ const GuestAnalytics = ({
     // counts all missing fields using underscore countby library to cound a modified key value
     // example modified values changes list_indefinite_conditions to "List indefinite conditions"
     // countBy method return an object of keys and their count
-    const countMissing = _.countBy(missingFields, function (field) {
+    const countMissing = _.countBy(missingFields, function(field) {
       let modified = field;
       return (
-        field.toString().charAt(0).toUpperCase() +
-        modified.slice(1).split('_').join(' ')
+        field
+          .toString()
+          .charAt(0)
+          .toUpperCase() +
+        modified
+          .slice(1)
+          .split('_')
+          .join(' ')
       );
     });
     let modifiedStringValues = [];

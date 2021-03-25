@@ -32,9 +32,16 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const date = new Date();
   const fullDate = date.toDateString();
 
+  console.log('guestD 35 user', user);
+  // console.log('guestD 36 log', log);
+  // console.log('guestD 37 global count', globalCount);
+  // console.log('guestD 38 fam', fam);
+  // console.log('guestD 39 hh', household);
+
   useEffect(() => {
     dispatch(getLatestLog());
-  }, [dispatch]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (log.date === fullDate && log.reservation_status === true) {

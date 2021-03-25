@@ -26,6 +26,7 @@ export const setCurrentUser = () => async dispatch => {
 export const getFamily = () => async dispatch => {
   dispatch({ type: 'GET_FAMILY_FETCHING' });
   const currentUser = await axiosWithAuth().get('/users/me');
+  console.log(currentUser);
   if (currentUser.data.user.role === 'guest') {
     try {
       let myFamily = await axiosWithAuth().get(
