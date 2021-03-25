@@ -1,191 +1,137 @@
-import React from 'react';
-import { Typography } from 'antd';
-import { Form, Input } from 'antd';
-
-const { Title } = Typography;
+import React, { useState } from 'react';
+import { Form, Input, Radio, Button } from 'antd';
+import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 const RenderFamilyMembers = ({ member }) => {
-  const { demographics, barriers, schools } = member;
-  console.log(member);
+  const { demographics, schools } = member;
 
-  const handleChange = () => {
-    console.log('changing');
+  const [editFormValues, setEditFormValues] = useState({
+    income: demographics.income,
+    employer: demographics.employer,
+    highest_grade_completed: schools.highest_grade_completed,
+    enrolled_status: schools.enrolled_status,
+    attendance_status: schools.attendance_status,
+    school_type: schools.school_type,
+    school_name: schools.school_name,
+    mckinney_school: schools.mckinney_school,
+  });
+
+  const newData = {
+    ...member,
+    demographics: {
+      ...demographics,
+      income: JSON.parse(editFormValues.income),
+      employer: editFormValues.employer,
+    },
+    schools: {
+      ...schools,
+      highest_grade_completed: editFormValues.highest_grade_completed,
+      enrolled_status: editFormValues.enrolled_status,
+      attendance_status: editFormValues.attendance_status,
+      school_type: editFormValues.school_type,
+      school_name: editFormValues.school_name,
+      mckinney_school: editFormValues.mckinney_school,
+    },
   };
 
-  const submitChanges = () => {
-    console.log('submit');
+  const handleChange = e => {
+    setEditFormValues({
+      ...editFormValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitChanges = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .put(`/members/${member.id}`, newData)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
     <div>
-      <Title level={5}>Basic Information</Title>
-      <div className="formDiv basic-info">
-        <Form onSubmit={submitChanges} layout={'inline'}>
-          <Form.Item label="Gender:">
-            <Input
-              name="gender"
-              type="text"
-              value={demographics.gender}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Relationship:">
-            <Input
-              name="gender"
-              type="text"
-              value={demographics.relationship}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Date of Birth:">
-            <Input
-              name="gender"
-              type="text"
-              value={demographics.DOB}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Monthly Income">
-            <Input
-              name="gender"
-              type="text"
-              value={demographics.income}
-              onChange={handleChange}
-            />
-          </Form.Item>
-        </Form>
-      </div>
-      <Title level={5}>Barriers</Title>
-      <div className="formDiv barriers">
-        <Form onSubmit={submitChanges} layout={'inline'}>
-          <Form.Item label="Alcohol Abuse">
-            <Input
-              name="gender"
-              type="text"
-              value={barriers.alcohol_abuse ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Chronic health issues">
-            <Input
-              name="chronic_issues"
-              type="text"
-              value={barriers.chronic_health_issues ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Drug abuse">
-            <Input
-              name="drug_abuse"
-              type="text"
-              value={barriers.drug_abuse ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="HIV/AIDS">
-            <Input
-              name="hiv"
-              type="text"
-              value={barriers.HIV_AIDs ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Menatal Illness">
-            <Input
-              name="mental_illness"
-              type="text"
-              value={barriers.mental_illness ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-          <Form.Item label="Physical Disabilities">
-            <Input
-              name="physical_disabilities"
-              type="text"
-              value={barriers.physical_disabilities ? 'Yes' : 'No'}
-              onChange={handleChange}
-            />
-          </Form.Item>
-        </Form>
-      </div>
-      {demographics.relationship === 'Child' && (
-        <>
-          <Title level={5}>Education:</Title>
-          <div className="formDiv education">
-            <form onSubmit={submitChanges}>
-              <label>
-                Highest Completed Grade:
-                <input
-                  name="grade_completed"
-                  type="text"
-                  value={schools.highest_grade_completed}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Are they currently enrolled:
-                <input
-                  name="currently_enrolled"
-                  type="text"
-                  value={schools.enrolled_status ? 'Yes' : 'No'}
-                  onChange={handleChange}
-                />
-              </label>
-              {!schools.enrolled_status && (
-                <label>
-                  Reason they are not Enrolled:
-                  <input
-                    name="enrolled"
-                    type="text"
-                    value={schools.reason_not_enrolled}
-                    onChange={handleChange}
-                  />
-                </label>
-              )}
-              {schools.enrolled_status && (
-                <>
-                  <label>
-                    Attendance Status:
-                    <input
-                      name="attendance"
-                      type="text"
-                      value={schools.attendance_status}
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Type of School:
-                    <input
-                      name="school_type"
-                      type="text"
-                      value={schools.school_type}
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Name of School:
-                    <input
-                      name="school_name"
-                      type="text"
-                      value={schools.school_name}
-                      onChange={handleChange}
-                    />
-                  </label>
-                  <label>
-                    Is the school associated with McKinney:
-                    <input
-                      name="school_associations"
-                      type="text"
-                      value={schools.mckinney_school ? 'Yes' : 'No'}
-                      onChange={handleChange}
-                    />
-                  </label>
-                </>
-              )}
-            </form>
-          </div>
-        </>
-      )}
+      <Form onSubmitCapture={submitChanges} layout={'verticle'}>
+        <h3>Work</h3>
+        <Form.Item label="Monthly Income">
+          <Input
+            name="income"
+            type="text"
+            value={editFormValues.income}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item label="Emplyoyer:">
+          <Input
+            name="employer"
+            type="text"
+            value={editFormValues.employer}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <h3>School</h3>
+        <Form.Item label="Highest Completed Grade:">
+          <Input
+            name="highest_grade_completed"
+            type="text"
+            value={editFormValues.highest_grade_completed}
+            onChange={handleChange}
+          />
+        </Form.Item>
+        <Form.Item label="Are they currently enrolled:">
+          <Radio.Group
+            name="enrolled_status"
+            value={editFormValues.enrolled_status}
+            onChange={handleChange}
+          >
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
+          </Radio.Group>
+        </Form.Item>
+        {schools.enrolled_status && (
+          <>
+            <Form.Item label="Attendance Status:">
+              <Input
+                name="attendance_status"
+                type="text"
+                value={editFormValues.attendance_status}
+                onChange={handleChange}
+              />
+            </Form.Item>
+            <Form.Item label="Type of School:">
+              <Input
+                name="school_type"
+                type="text"
+                value={editFormValues.school_type}
+                onChange={handleChange}
+              />
+            </Form.Item>
+            <Form.Item label="School Name:">
+              <Input
+                name="school_name"
+                type="text"
+                value={editFormValues.school_name}
+                onChange={handleChange}
+              />
+            </Form.Item>
+            <Form.Item label="Is the school associated with McKinney:">
+              <Radio.Group
+                name="mckinney_school"
+                value={editFormValues.mckinney_school}
+                onChange={handleChange}
+              >
+                <Radio value={true}>Yes</Radio>
+                <Radio value={false}>No</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </>
+        )}
+        <Button onClick={submitChanges}>Edit Member</Button>
+      </Form>
     </div>
   );
 };

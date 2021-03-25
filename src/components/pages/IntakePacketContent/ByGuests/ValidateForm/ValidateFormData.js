@@ -15,7 +15,6 @@ const ValidateFormData = ({
   navigation,
   tempFormStyle,
   formData,
-  setForm,
   steps,
   step,
 }) => {
