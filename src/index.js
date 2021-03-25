@@ -42,7 +42,7 @@ import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnaly
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
 import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
 import { LastLocationProvider } from 'react-router-last-location';
-import DailyChecklist from './components/pages/guest-pages/DailyChecklist';
+import DailyChecklist from './components/pages/guest-pages/DailyChecklist/DailyChecklist';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
