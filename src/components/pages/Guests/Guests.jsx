@@ -4,19 +4,16 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import MaterialTable from 'material-table';
 
-import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
-import FlagIcon from '@material-ui/icons/Flag';
 import { Paper } from '@material-ui/core';
 
 import './guest.css';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
 import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
+import GuestNotes from './GuestDetails/components/GuestNotes';
 import LoadingComponent from '../../common/LoadingComponent';
-import GuestMoreInfo from './GuestMoreInfo';
+import GuestMoreInfo from './GuestDetails/components/GuestMoreInfo';
 
 Modal.setAppElement('#root');
 
@@ -65,7 +62,7 @@ const Guests = () => {
             ...member,
           };
         });
-        copy.data.push(...formattedData);
+        copy.data = formattedData;
         console.log(copy);
 
         setState(copy);
@@ -78,6 +75,8 @@ const Guests = () => {
           setLoading(false);
         }
       });
+
+    console.log(state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -142,36 +141,10 @@ const Guests = () => {
             actions={[
               {
                 icon: PeopleIcon,
-                tooltip: 'Family Members',
+                tooltip: 'Guest Details',
                 onClick: (event, rowData) => {
-                  // Do save operation
                   console.log(rowData);
-                  history.push(`/family/${rowData.family_id}`);
-                },
-              },
-              {
-                icon: NoteIcon,
-                tooltip: 'Notes',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  setIsNotesOpen(true);
-                },
-              },
-              {
-                icon: FlagIcon,
-                tooltip: 'Flag Guest',
-                onClick: (event, rowData) => {
-                  setIsFlagOpen(true);
-                  setGuestId(rowData.id);
-                },
-              },
-              {
-                icon: InfoIcon,
-                tooltip: 'More Info',
-                onClick: (event, rowData) => {
-                  setResult(rowData);
-                  setIsOpen(!isOpen);
-                  // Do save operation
+                  history.push(`/guests/${rowData.id}`);
                 },
               },
             ]}

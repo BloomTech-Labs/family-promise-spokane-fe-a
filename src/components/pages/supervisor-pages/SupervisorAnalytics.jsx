@@ -103,7 +103,7 @@ const Analytics = () => {
   useEffect(() => {
     dispatch(getDailyReservationLogs());
     //eslint-ignore-next-line
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     let filteredLogs = [];

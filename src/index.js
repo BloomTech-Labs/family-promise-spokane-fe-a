@@ -12,18 +12,15 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Provider, useSelector } from 'react-redux';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+import { LastLocationProvider } from 'react-router-last-location';
 
-import 'dotenv';
-
-import './styles/app.scss';
-import 'antd/dist/antd.less';
-
+import { config } from './utils/oktaConfig';
 import PrivateRoute from './utils/auth/PrivateRoute';
+
 import { NotFoundPage } from './components/pages/NotFound';
 import EditGuestInformation from './components/pages/guest-pages/EditProfileInfo/EditGuestInformation';
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
-import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
@@ -40,7 +37,11 @@ import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
 import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
-import { LastLocationProvider } from 'react-router-last-location';
+import GuestDetails from './components/pages/Guests/GuestDetails/GuestDetails';
+
+import 'dotenv';
+import './styles/app.scss';
+import 'antd/dist/antd.less';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -135,11 +136,16 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={IntakePacket}
         />
-
         <Route
+          exact
           path="/guests"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={Guests}
+        />
+        <Route
+          path="/guests/:id"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={GuestDetails}
         />
         <PrivateRoute
           path="/supervisor-checkin"
