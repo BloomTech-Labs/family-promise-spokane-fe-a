@@ -78,6 +78,24 @@ export const getMembers = () => async dispatch => {
   }
 };
 
+export const getSpecificMember = id => async dispatch => {
+  dispatch({ type: 'GET_SPEC_MEMBER_FETCHING' });
+  const currentUser = await axiosWithAuth().get('/users/me');
+  if (currentUser.data.user.role !== 'guest') {
+    try {
+      let specificMember = await axiosWithAuth().get(`/members/${id}`);
+      console.log('actions 87', specificMember);
+      dispatch({
+        type: 'GET_SPEC_MEMBER_SUCCESS',
+        payload: specificMember.data,
+      });
+    } catch (error) {
+      console.log('actions 93', error);
+      dispatch({ type: 'GET_SPEC_MEMBER_FAILURE', payload: error.message });
+    }
+  }
+};
+
 export const getBeds = () => async dispatch => {
   dispatch({ type: 'TOTAL_BEDS_FETCHING' });
   try {
