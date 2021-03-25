@@ -5,7 +5,6 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 import GuestNotes from './components/GuestNotes';
 import GuestMoreInfo from './components/GuestMoreInfo';
-import Family from '../../FamilyMembers/Family';
 import FamilyDetails from './components/FamilyDetails';
 
 import { Button, Card } from 'antd';
@@ -71,7 +70,12 @@ const GuestDetails = () => {
     ),
     tab3: (
       <div className="tabContainer">
-        <p>Flag Guest</p>
+        {/* 
+          Need to convert flagged guests into a usable format for this layout. 
+          To get started consider functionality and If it should go here or
+          be incorporated into Refactored Guests Table
+        */}
+        <p>Handle Flagging of Guests Level</p>
       </div>
     ),
     tab4: (
