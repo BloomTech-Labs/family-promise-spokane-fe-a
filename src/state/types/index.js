@@ -44,3 +44,8 @@ export const LOGS_DAILY_FAILURE = 'LOGS_DAILY_FAILURE';
 //docusign
 export const DOCUSIGN_REDIRECT = 'DOCUSIGN_REDIRECT';
 export const SIGNER_INFO = 'SIGNER_INFO';
+
+//getting a specific user for rendering their data
+export const GET_SPEC_MEMBER_FETCHING = 'GET_SPEC_MEMBER_FETCHING';
+export const GET_SPEC_MEMBER_SUCCESS = 'GET_SPEC_MEMBER_SUCCESS';
+export const GET_SPEC_MEMBER_FAILURE = 'GET_SPEC_MEMBER_FAILURE';

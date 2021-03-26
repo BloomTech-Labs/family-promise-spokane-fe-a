@@ -28,6 +28,9 @@ import {
   LOGS_DAILY_FAILURE,
   DOCUSIGN_REDIRECT,
   SIGNER_INFO,
+  GET_SPEC_MEMBER_FETCHING,
+  GET_SPEC_MEMBER_SUCCESS,
+  GET_SPEC_MEMBER_FAILURE,
   // Total beds at shelter
 } from '../types';
 
@@ -44,6 +47,7 @@ const INITIAL_STATE = {
   RESERVATION_LOGS: [],
   DOCUSIGN_URL: '',
   SIGNER_INFORMATION: {},
+  SPECIFIC_MEMBER: {},
 };
 
 export const rootReducer = (state = INITIAL_STATE, action) => {
@@ -102,6 +106,12 @@ export const rootReducer = (state = INITIAL_STATE, action) => {
       return { ...state, DOCUSIGN_URL: action.payload, LOADING: false };
     case SIGNER_INFO:
       return { ...state, SIGNER_INFORMATION: action.payload };
+    case GET_SPEC_MEMBER_FETCHING:
+      return { ...state, LOADING: true };
+    case GET_SPEC_MEMBER_SUCCESS:
+      return { ...state, LOADING: false, SPECIFIC_MEMBER: action.payload };
+    case GET_SPEC_MEMBER_FAILURE:
+      return { ...state, LOADING: false, ERROR: action.payload };
     default:
       return state;
   }

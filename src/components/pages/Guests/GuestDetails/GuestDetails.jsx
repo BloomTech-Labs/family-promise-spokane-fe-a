@@ -6,6 +6,7 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import GuestNotes from './components/GuestNotes';
 import GuestMoreInfo from './components/GuestMoreInfo';
 import FamilyDetails from './components/FamilyDetails';
+import LoadingComponent from '../../../common/LoadingComponent';
 
 import { Button, Card } from 'antd';
 
@@ -17,20 +18,24 @@ const GuestDetails = () => {
 
   const [memberInfo, setMemberInfo] = useState({});
   const [tabCard, setTabCard] = useState({
-    key: 'tab4',
+    key: 'tab1',
   });
+  const [loading, setLoading] = useState(true);
+
+  const fetchMemberInfo = async id => {
+    try {
+      const res = await axiosWithAuth().get(`/members/${id}`);
+      setMemberInfo(res.data);
+    } catch (error) {
+      console.log('Error fetching Member Info');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    axiosWithAuth()
-      .get(`/members/${id}`)
-      .then(res => {
-        setMemberInfo(res.data);
-      })
-      .catch(err => {
-        alert('error');
-        console.log(err.message);
-      });
-
+    fetchMemberInfo(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -85,7 +90,9 @@ const GuestDetails = () => {
     ),
   };
 
-  console.log(memberInfo);
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <div style={{ marginLeft: '14%' }}>

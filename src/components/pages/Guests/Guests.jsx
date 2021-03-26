@@ -20,7 +20,7 @@ const TitleStyled = styled.div`
 `;
 
 const Guests = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name' },
