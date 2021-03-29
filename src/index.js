@@ -34,8 +34,9 @@ import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
-import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
+// import clientStaffSig from './components/pages/IntakePacketContent/BySupervisor/ClientReleaseStaffSig';
 import GuestDetails from './components/pages/Guests/GuestDetails/GuestDetails';
+import RenderShelterInfo from './components/pages/IntakePacketContent/ByGuests/ShelterInfo/index';
 
 import 'dotenv';
 import './styles/app.scss';
@@ -83,11 +84,7 @@ function App() {
             return null;
           }}
         />
-        <Route
-          path="/outtake/:signerId"
-          roles={['executive_director', 'supervisor', 'case_manager']}
-          component={clientStaffSig}
-        />
+        <Route path="/outtake/:signerId" component={RenderShelterInfo} />
         {/* any of the routes you need secured should be registered as SecureRoutes */}
 
         <PrivateRoute

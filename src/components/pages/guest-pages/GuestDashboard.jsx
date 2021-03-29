@@ -276,6 +276,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
   // const getTime = fullDate + hours + '-' + minutes;
   // This seconds will not be seen, but this will allow the clock to rerender accordingly.
+  //eslint-disable-next-line
   const [seconds, setSeconds] = useState();
   let sec = new Date().getSeconds();
   useEffect(() => {
