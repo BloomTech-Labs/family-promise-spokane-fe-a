@@ -1,12 +1,12 @@
 //
 import React from 'react';
-import ShelterSchedule from './ShelterInfo/ShelterSchedule';
-import NightShelter from './ShelterInfo/NightShelter';
-import Welcome from './ShelterInfo/Welcome';
-import Inside from './ShelterInfo/Inside';
-import Outside from './ShelterInfo/Outside';
-import Important from './ShelterInfo/Important';
-import Resources from './ShelterInfo/Resources';
+import ShelterSchedule from '../IntakePacketContent/ByGuests/ShelterInfo/ShelterSchedule';
+import NightShelter from '../IntakePacketContent/ByGuests/ShelterInfo/NightShelter';
+import Welcome from '../IntakePacketContent/ByGuests/ShelterInfo/Welcome';
+import Inside from '../IntakePacketContent/ByGuests/ShelterInfo/Inside';
+import Outside from '../IntakePacketContent/ByGuests/ShelterInfo/Outside';
+import Important from '../IntakePacketContent/ByGuests/ShelterInfo/Important';
+import Resources from '../IntakePacketContent/ByGuests/ShelterInfo/Resources';
 
 import { Collapse } from 'antd';
 import 'antd/dist/antd.css';

@@ -102,17 +102,15 @@ const Resources = () => {
           <Form.Item>
             HEALTH INSURANCE: Do you need health insurance for your family?
             <ul>
+              <li>Apply Online:</li>
               <li>
-                Apply Online:
-                <li>
-                  <a
-                    href="https://www.wahealthplanfinder.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    https://www.wahealthplanfinder.org
-                  </a>
-                </li>
+                <a
+                  href="https://www.wahealthplanfinder.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://www.wahealthplanfinder.org
+                </a>
               </li>
             </ul>
           </Form.Item>
