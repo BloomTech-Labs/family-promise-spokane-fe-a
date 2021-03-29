@@ -19,16 +19,28 @@ const RenderShelterInfo = () => {
     shelterSchedule: false,
     inside: false,
     outside: false,
-    nightShleter: false,
+    nightShelter: false,
     important: false,
     resources: false,
   });
-  const [buttonActive, setButtonActive] = useState(false);
+  const [buttonActive, setButtonActive] = useState(true);
 
+  // this will check if all values in hasRead are true. If all are true, we will enable button
+  function allTrue(obj) {
+    for (var o in obj)
+      if (!obj[o]) {
+        return true;
+      }
+    return false;
+  }
+
+  // removing token from local storage so that guest does not have access to supervisor
+  // info when coming back from docusign
   useEffect(() => {
     localStorage.clear();
   }, []);
 
+  // changes value of hasRead to true if checked
   const changeHandler = e => {
     setHasRead({
       ...hasRead,
@@ -37,7 +49,10 @@ const RenderShelterInfo = () => {
     console.log(hasRead);
   };
 
-  const buttonHandler = e => {};
+  // will run allTrue, listening to state of hasRead
+  useEffect(() => {
+    setButtonActive(allTrue(hasRead));
+  }, [hasRead]);
 
   return (
     <div style={{ width: '80%', margin: '0 auto' }}>
@@ -117,7 +132,11 @@ const RenderShelterInfo = () => {
           </Checkbox>
         </Panel>
       </Collapse>
-      <Button type="primary" onClick={() => history.push('/login')}>
+      <Button
+        type="primary"
+        onClick={() => history.push('/login')}
+        disabled={buttonActive}
+      >
         Return To Login
       </Button>
     </div>
