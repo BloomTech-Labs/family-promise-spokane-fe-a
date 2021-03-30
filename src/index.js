@@ -9,7 +9,8 @@ import {
 import { rootReducer } from './state/reducers/index';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
+// removed logger to clean up console. can put back in on line 46 in midddleware if needed.
+// import logger from 'redux-logger';
 import { Provider, useSelector } from 'react-redux';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import { LastLocationProvider } from 'react-router-last-location';
@@ -42,7 +43,7 @@ import 'dotenv';
 import './styles/app.scss';
 import 'antd/dist/antd.less';
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

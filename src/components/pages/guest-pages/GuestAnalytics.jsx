@@ -20,15 +20,11 @@ const GuestAnalytics = ({
   // const family = useSelector(state => state.FAMILY);
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
-  console.log('GA 22', user);
 
   const fetchFamilyHousehold = async () => {
     try {
       const res = await axiosWithAuth().get(`/users/${user.id}/family`);
-      console.log(res);
-
       const family = res.data.family;
-
       fetchHousehold(family.id);
     } catch (error) {
       alert('error');
@@ -40,7 +36,6 @@ const GuestAnalytics = ({
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
-    console.log(percent);
     setPercentComplete(percent[0]);
     setMissingFields(percent[1]);
     // eslint-disable-next-line
@@ -82,10 +77,10 @@ const GuestAnalytics = ({
         </div>
         <div className="missing-info-section">
           <h2>Missing household information: </h2>
-          {formatMissingData().map(msg => {
+          {formatMissingData().map((msg, idx) => {
             return (
-              <ul>
-                <li>{msg}</li>
+              <ul key={idx}>
+                <li key={idx}>{msg}</li>
               </ul>
             );
           })}
@@ -97,7 +92,6 @@ const GuestAnalytics = ({
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     household: state.HOUSEHOLD,
     loading: state.LOADING,

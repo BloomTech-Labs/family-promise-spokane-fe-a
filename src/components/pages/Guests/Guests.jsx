@@ -39,7 +39,6 @@ const Guests = () => {
     axiosWithAuth()
       .get('/members')
       .then(res => {
-        console.log(res.data);
         let copy = { ...state };
 
         let formattedData = res.data.map(member => {
@@ -53,8 +52,6 @@ const Guests = () => {
           };
         });
         copy.data = formattedData;
-        console.log(copy);
-
         setState(copy);
       })
       .catch(err => {
@@ -66,8 +63,6 @@ const Guests = () => {
           setLoading(false);
         }
       });
-
-    console.log(state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -109,7 +104,6 @@ const Guests = () => {
                 icon: PeopleIcon,
                 tooltip: 'Guest Details',
                 onClick: (event, rowData) => {
-                  console.log(rowData);
                   history.push(`/guests/${rowData.id}`);
                 },
               },

@@ -72,8 +72,6 @@ const EditHouseHoldInfo = ({ familyInfo, setCloseModal }) => {
     },
   };
 
-  console.log('NEW DATA', newData);
-
   const handleChange = e => {
     setFamilyInfoForm({
       ...familyInfoForm,
@@ -88,9 +86,6 @@ const EditHouseHoldInfo = ({ familyInfo, setCloseModal }) => {
     e.preventDefault();
     axiosWithAuth()
       .put(`/families/${familyInfo.id}`, newData)
-      .then(res => {
-        console.log(res);
-      })
       .catch(err => {
         console.log(err);
       });

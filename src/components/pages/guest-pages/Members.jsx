@@ -17,7 +17,7 @@ const MembersPage = () => {
   const [familyId, setFamilyId] = useState();
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'Relationship', field: 'relationship' },

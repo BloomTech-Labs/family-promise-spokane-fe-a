@@ -69,7 +69,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
       if (membersStaying.indexOf(e.target.value) === -1)
         setMembersStaying([...membersStaying, e.target.value]);
-      console.log('membersStaying', membersStaying);
     } else if (e.target.checked === false) {
       setCount(count + 1);
       //taking member out if canceling
@@ -105,7 +104,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
           setUsers(res.data);
           axiosWithAuth()
             .get(`logs/${res.data[0].family_id}`)
-            .then(res => console.log(res.data[0].reservation_status))
+            // .then(res => console.log(res.data[0].reservation_status))
             .catch(err => console.log(err));
         })
         .catch(err => console.log('get family error'));
@@ -117,7 +116,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //Warning shows for this but it is needed in order to render the checkboxes *******************
   useEffect(() => {
     fetchFamilyInformation()
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log('ERROR IN GLOBAL COUNT USE EFFECT', err));
     //eslint-disable-next-line
   }, []);
@@ -142,15 +141,12 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       })
       .then(res => {
         const resId = res.data.logs.reservation_id;
-        console.log('res data', res.data.logs.reservation_status);
         setResID(resId);
         setIsReserved(res.data.logs.reservation_status);
       })
       .catch(err => {
         console.log('Nope', err);
       });
-    console.log('local bed count', localBedCount);
-    console.log('global bed count', globalCount);
 
     const checkIn = {
       check_in: [
@@ -177,7 +173,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     setFamilyMemberIDs(memberIDs);
 
     for (let i = 0; i < memberIDs.length; i++) {
-      console.log(memberIDs[i]);
       axiosWithAuth()
         .put(`/members/${memberIDs[i]}`, checkIn)
         .then(res =>
@@ -351,15 +346,16 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               Select which family members you would like to check in:
             </Text>
             <div className="membersContainer">
-              {users.map(member => {
+              {users.map((member, idx) => {
                 return (
                   <FormControlLabel
+                    key={idx}
                     control={
                       <Checkbox
                         value={`${member.demographics.first_name} ${member.demographics.last_name}`}
                         onChange={familyStaying}
                         color="primary"
-                        size="large"
+                        size="medium"
                       >
                         {member.demographics.first_name}{' '}
                         {member.demographics.last_name}

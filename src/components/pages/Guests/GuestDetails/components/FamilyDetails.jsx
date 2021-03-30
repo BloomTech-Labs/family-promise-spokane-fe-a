@@ -30,13 +30,15 @@ const FamilyDetails = ({ familyId }) => {
   return (
     <div>
       <Collapse>
-        {membersInfo.map(member => {
-          console.log(member);
+        {membersInfo.map((member, idx) => {
           return (
             <>
-              <Panel header={member.first_name + ' ' + member.last_name}>
-                <p>Relationship: {member.relationship}</p>
-                <p>Date of Birth: {member.DOB}</p>
+              <Panel
+                header={member.first_name + ' ' + member.last_name}
+                key={idx}
+              >
+                <p key={idx}>Relationship: {member.relationship}</p>
+                <p key={idx}>Date of Birth: {member.DOB}</p>
               </Panel>
             </>
           );
