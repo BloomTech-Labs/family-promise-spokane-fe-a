@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 const NavBar = () => {
   const family = useSelector(state => state.FAMILY);
+  const currentUser = useSelector(state => state.CURRENT_USER);
 
   const history = useHistory();
   const { authState, authService } = useOktaAuth();
@@ -37,7 +38,11 @@ const NavBar = () => {
 
   const menu = (
     <Menu>
-      <Menu.Item onClick={goToProfile}>Profile</Menu.Item>
+      {/* will only render the profile section for guests, 
+      only guests have a family with family information  */}
+      {currentUser.role === 'guest' && (
+        <Menu.Item onClick={goToProfile}>Profile</Menu.Item>
+      )}
       <Menu.Item onClick={handleLogout}>Logout</Menu.Item>
     </Menu>
   );
