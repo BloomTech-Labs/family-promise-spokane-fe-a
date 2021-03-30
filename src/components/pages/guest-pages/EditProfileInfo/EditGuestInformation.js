@@ -12,8 +12,6 @@ const EditGuestInformation = ({ fetchHousehold, setCloseModal }) => {
   const [familyInfo, setFamilyInfo] = useState({});
   const [membersInfo, setMembersInfo] = useState({});
 
-  console.log('houshold info', familyInfo);
-
   const user = useSelector(state => state.CURRENT_USER);
 
   const fetchFamilyHousehold = async () => {
@@ -32,7 +30,6 @@ const EditGuestInformation = ({ fetchHousehold, setCloseModal }) => {
       const res = await axiosWithAuth().get(
         `/families/${familyInfo.id}/members`
       );
-      console.log('Members ', res.data);
       setMembersInfo(res.data);
     } catch (error) {
       console.log(error);
@@ -48,12 +45,6 @@ const EditGuestInformation = ({ fetchHousehold, setCloseModal }) => {
     fetchMembersData();
     // eslint-disable-next-line
   }, [familyInfo]);
-
-  console.log('Parent component ', membersInfo);
-
-  // const getAllState = (memberState) => {
-  //   console.log([...memberState]);
-  // };
 
   return (
     <>
