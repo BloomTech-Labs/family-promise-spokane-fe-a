@@ -116,7 +116,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //Warning shows for this but it is needed in order to render the checkboxes *******************
   useEffect(() => {
     fetchFamilyInformation()
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log('ERROR IN GLOBAL COUNT USE EFFECT', err));
     //eslint-disable-next-line
   }, []);
@@ -141,7 +141,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       })
       .then(res => {
         const resId = res.data.logs.reservation_id;
-        console.log('res data', res.data.logs.reservation_status);
         setResID(resId);
         setIsReserved(res.data.logs.reservation_status);
       })
@@ -174,7 +173,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     setFamilyMemberIDs(memberIDs);
 
     for (let i = 0; i < memberIDs.length; i++) {
-      console.log(memberIDs[i]);
       axiosWithAuth()
         .put(`/members/${memberIDs[i]}`, checkIn)
         .then(res =>
