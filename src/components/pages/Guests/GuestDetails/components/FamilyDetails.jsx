@@ -31,7 +31,6 @@ const FamilyDetails = ({ familyId }) => {
     <div>
       <Collapse>
         {membersInfo.map(member => {
-          console.log(member);
           return (
             <>
               <Panel header={member.first_name + ' ' + member.last_name}>

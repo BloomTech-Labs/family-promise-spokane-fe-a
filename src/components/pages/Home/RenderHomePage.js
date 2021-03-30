@@ -4,9 +4,7 @@ import { Redirect } from 'react-router-dom';
 function RenderHomePage(props) {
   const user = useSelector(state => state.CURRENT_USER);
 
-  React.useEffect(() => {
-    console.log(user);
-  }, [user]);
+  React.useEffect(() => {}, [user]);
 
   if (!user.role) {
     return <div test-id="waiting">Waiting..</div>;
