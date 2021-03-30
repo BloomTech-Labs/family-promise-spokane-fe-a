@@ -351,15 +351,16 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               Select which family members you would like to check in:
             </Text>
             <div className="membersContainer">
-              {users.map(member => {
+              {users.map((member, idx) => {
                 return (
                   <FormControlLabel
+                    key={idx}
                     control={
                       <Checkbox
                         value={`${member.demographics.first_name} ${member.demographics.last_name}`}
                         onChange={familyStaying}
                         color="primary"
-                        size="large"
+                        size="medium"
                       >
                         {member.demographics.first_name}{' '}
                         {member.demographics.last_name}
