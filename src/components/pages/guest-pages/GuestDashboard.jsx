@@ -69,7 +69,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
       if (membersStaying.indexOf(e.target.value) === -1)
         setMembersStaying([...membersStaying, e.target.value]);
-      console.log('membersStaying', membersStaying);
     } else if (e.target.checked === false) {
       setCount(count + 1);
       //taking member out if canceling
@@ -105,7 +104,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
           setUsers(res.data);
           axiosWithAuth()
             .get(`logs/${res.data[0].family_id}`)
-            .then(res => console.log(res.data[0].reservation_status))
+            // .then(res => console.log(res.data[0].reservation_status))
             .catch(err => console.log(err));
         })
         .catch(err => console.log('get family error'));
@@ -149,8 +148,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       .catch(err => {
         console.log('Nope', err);
       });
-    console.log('local bed count', localBedCount);
-    console.log('global bed count', globalCount);
 
     const checkIn = {
       check_in: [
