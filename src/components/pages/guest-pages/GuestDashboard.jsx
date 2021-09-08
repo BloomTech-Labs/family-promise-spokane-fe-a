@@ -44,17 +44,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     dispatch(getLatestLog());
   }, []);
 
-  useEffect(() => {
-    //const myLog =  await
-    //console.log('myLog', myLog);
-
-    if (log.date === fullDate && log.reservation_status === true) {
-      console.log('THIS IS THE RES STATUS');
-      setIsReserved(true);
-      setResID(log.reservation_id);
-    }
-  }, [log]);
-
   const { Text } = Typography;
 
   // For Members Staying
